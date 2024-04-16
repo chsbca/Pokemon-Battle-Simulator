@@ -170,9 +170,7 @@ const BattlePage = () => {
     };
 
     const enemySwitchCounterattack = (newPokemon) => {
-        if (ourTeamHP[currentPokemon.pokemon.pokedex_number] > 0) {
-    // if (currentPokemon.pokemon.hp > 0) {
-            alert("enemy triggers a counterattack!")
+        if (currentPokemon.pokemon.hp > 0) {
             const randomMove = selectRandomMove(cynthiaPokemon)
             executeAttack(cynthiaPokemon, newPokemon, randomMove)
         }
