@@ -265,7 +265,6 @@ const BattlePage = () => {
                                             ))}
                                         </Tab>
                                         <Tab eventKey="switch" title="Switch Pokémon">
-
                                             {ourTeam.map((poke, index) => (
                                                 <Accordion key={index}>
                                                     <Accordion.Item eventKey="0">
@@ -279,8 +278,6 @@ const BattlePage = () => {
                                                                     <p key={idx}>{move.learnable_move.name}</p>
                                                                 ))}
                                                             </div>
-                                                            {/* if currentPokemon.pokemon.hp <= 0, nothing
-                                                                if > 0, enemySwitchCounterattack */}
                                                             <Button onClick={() => switchPokemon(poke)}>Select</Button>
                                                         </Accordion.Body>
                                                     </Accordion.Item>

@@ -77,7 +77,6 @@ const BattlePage = () => {
     };
 
     const handleAttack = (userMove) => {
-        setUserHasAttacked(true)
         if (!userHasAttacked) {
             const userPoke = currentPokemon;
             const cynPoke = cynthiaPokemon;
@@ -90,11 +89,11 @@ const BattlePage = () => {
             }
 
             if (cynthiaPokemon.pokemon.hp <= 0) {
-                const nextPokemon = selectNextCynthiaPokemon()
+                const nextPokemon = selectNextCynthiaPokemon();
                 if (nextPokemon) {
                     setCynthiaPokemon(nextPokemon);
                 } else {
-                    alert("Cynthia has no more Pokémon left! You win!")
+                    alert("Cynthia has no more Pokémon left! You win!");
                     return; // Stop the function if no Pokémon are left for Cynthia
                 }
             }
@@ -107,32 +106,30 @@ const BattlePage = () => {
                 performBattle(cynPoke, userPoke, selectRandomMove(cynPoke), userMove)
             }
         }
-        setTimeout(() => {
-            (setUserHasAttacked(false))
-        }, 2000)
+        setUserHasAttacked(false)
     };
     // change logic for defenderType
     const getTypeEffectiveness = (moveType, defenderTypes) => {
-        let multiplier = 1
+        let multiplier = 1;
 
         // Loop through each of defender's types to calculate effectiveness
         defenderTypes.forEach(defenderType => {
             // Find the effectiveness relation for this moveType against the defender's type
-            let typeEffect = moveType.effectiveness_relations.find(relation => relation.target_type === defenderType.name)
+            let typeEffect = moveType.effectiveness_relations.find(relation => relation.target_type === moveType)
             // let typeEffect = defenderType.effectiveness_relations.find(relation => relation.target_type === defenderTypes)
             // let typeEffect = defenderType.affected_by_relations.find(relation => relation.target_type === moveType)
             if (typeEffect) {
                 // Apply the multiplier from the effectiveness relation found
-                multiplier *= effectivenessMultipliers[typeEffect.effectiveness] // Default to 1 if no matching typeEffect is found
-                console.log(`Effectiveness for move type ${moveType.name} against ${defenderType.name}: ${typeEffect.effectiveness} (${effectivenessMultipliers[typeEffect.effectiveness]})`);
+                multiplier *= effectivenessMultipliers[typeEffect.effectiveness] || 1; // Default to 1 if no matching typeEffect is found
+                console.log(`Effectiveness for move type ${moveType} against ${defenderType.name}: ${typeEffect.effectiveness} (${effectivenessMultipliers[typeEffect.effectiveness]})`);
                 console.log(`TypeEffect found:`, typeEffect)
             } else {
                 // Log when no specific effectiveness relation is found
                 console.log(`No specific effectiveness relation found for move type ${moveType} against ${defenderType.name}`);
             }
-            console.log(`Current multiplier for ${moveType.name} against [${defenderTypes.map(t => t.name).join(', ')}]: ${multiplier}`)
+            console.log(`Current multiplier for ${moveType} against [${defenderTypes.map(t => t.name).join(', ')}]: ${multiplier}`)
         })
-        console.log(`Final overall multiplier for move type ${moveType.name} against all types [${defenderTypes.map(t => t.name).join(', ')}]: ${multiplier}`);
+        console.log(`Final overall multiplier for move type ${moveType} against all types [${defenderTypes.map(t => t.name).join(', ')}]: ${multiplier}`);
         return multiplier
     };
 
@@ -158,14 +155,8 @@ const BattlePage = () => {
             //if secondAttacker.hp === 0, selectNextCynthiaPokemon()
             if (newHPAfterFirstAttack > 0) {
                 executeAttack(secondAttacker, firstAttacker, secondMove);
-            } else {
-                selectNextCynthiaPokemon()
             }
         }, 1000);
-
-        if (secondAttacker.pokemon.hp === 0) {
-            selectNextCynthiaPokemon()
-        }
     };
 
     const executeAttack = (attacker, defender, move) => {
@@ -211,11 +202,11 @@ const BattlePage = () => {
                     alert("Cynthia has no more Pokémon left! You win!");
                 }
             } else {
+                // If user's Pokémon faints, prompt to select another Pokémon
                 alert("Your Pokémon has fainted, please select another to continue.");
             }
         }
         console.log(move.learnable_move.name)
-        console.log(`newHP: ${newHP}`)
         return newHP
     }
 
@@ -231,14 +222,6 @@ const BattlePage = () => {
             return null; // Indicate game over
         }
     };
-
-    const progressBarColor = (currentHP, maxHP) => {
-        const percentage = (currentHP / maxHP) * 100
-        if (percentage > 50) return 'success'
-        if (percentage > 25) return 'warning'
-        return 'danger'
-    }
-
     return (
         <Container className="mt-5 text-center">
             <h1>Battle Page</h1>
@@ -250,22 +233,17 @@ const BattlePage = () => {
                                 <Card.Img variant="top" src={currentPokemon.pokemon.sprite} />
                                 <Card.Body>
                                     <Card.Title>{currentPokemon.pokemon.name}</Card.Title>
-                                    <ProgressBar
-                                        now={(ourTeamHP[currentPokemon.pokemon.pokedex_number] / currentPokemon.pokemon.hp) * 100}
-                                        label={`HP: ${ourTeamHP[currentPokemon.pokemon.pokedex_number]} / ${currentPokemon.pokemon.hp}`}
-                                        variant={progressBarColor(ourTeamHP[currentPokemon.pokemon.pokedex_number], currentPokemon.pokemon.hp)}
-                                    />
+                                    <ProgressBar now={(ourTeamHP[currentPokemon.pokemon.pokedex_number] / currentPokemon.pokemon.hp) * 100} label={`HP: ${ourTeamHP[currentPokemon.pokemon.pokedex_number]} / ${currentPokemon.pokemon.hp}`} />
                                     <Card.Text>Types: {currentPokemon.pokemon.types.map(t => t.name).join(', ')}</Card.Text>
                                     <Tabs defaultActiveKey="fight">
                                         <Tab eventKey="fight" title="Fight">
                                             {currentPokemon.chosen_moves.map((move, index) => (
-                                                <Button key={index} onClick={() => handleAttack(move)} disabled={userHasAttacked}>
+                                                <Button key={index} onClick={() => handleAttack(move)}>
                                                     {move.learnable_move.name}
                                                 </Button>
                                             ))}
                                         </Tab>
                                         <Tab eventKey="switch" title="Switch Pokémon">
-
                                             {ourTeam.map((poke, index) => (
                                                 <Accordion key={index}>
                                                     <Accordion.Item eventKey="0">
@@ -275,12 +253,12 @@ const BattlePage = () => {
                                                         <Accordion.Body>
                                                             <div>
                                                                 <p>Moves:</p>
-                                                                {poke.chosen_moves.map((move, idx) => (
-                                                                    <p key={idx}>{move.learnable_move.name}</p>
-                                                                ))}
+                                                                <ul>
+                                                                    {poke.chosen_moves.map((move, idx) => (
+                                                                        <li key={idx}>{move.learnable_move.name}</li>
+                                                                    ))}
+                                                                </ul>
                                                             </div>
-                                                            {/* if currentPokemon.pokemon.hp <= 0, nothing
-                                                                if > 0, enemySwitchCounterattack */}
                                                             <Button onClick={() => switchPokemon(poke)}>Select</Button>
                                                         </Accordion.Body>
                                                     </Accordion.Item>
@@ -302,11 +280,7 @@ const BattlePage = () => {
                                 <Card.Img variant="top" src={cynthiaPokemon.pokemon.sprite} />
                                 <Card.Body>
                                     <Card.Title>{cynthiaPokemon.pokemon.name}</Card.Title>
-                                    <ProgressBar
-                                        now={(cynthiaTeamHP[cynthiaPokemon.pokemon.pokedex_number] / cynthiaPokemon.pokemon.hp) * 100}
-                                        label={`HP: ${cynthiaTeamHP[cynthiaPokemon.pokemon.pokedex_number]} / ${cynthiaPokemon.pokemon.hp}`}
-                                        variant={progressBarColor(cynthiaTeamHP[cynthiaPokemon.pokemon.pokedex_number], cynthiaPokemon.pokemon.hp)}
-                                    />
+                                    <ProgressBar now={(cynthiaTeamHP[cynthiaPokemon.pokemon.pokedex_number] / cynthiaPokemon.pokemon.hp) * 100} label={`HP: ${cynthiaTeamHP[cynthiaPokemon.pokemon.pokedex_number]} / ${cynthiaPokemon.pokemon.hp}`} />
                                     <Card.Text>Types: {cynthiaPokemon.pokemon.types.map(t => t.name).join(', ')}</Card.Text>
                                     {cynthiaTeam.map((poke, index) => (
                                         <Accordion key={index}>
@@ -315,11 +289,11 @@ const BattlePage = () => {
                                                     {poke.pokemon.name} - HP: {cynthiaTeamHP[poke.pokemon.pokedex_number]} / {poke.pokemon.hp}
                                                 </Accordion.Header>
                                                 <Accordion.Body>
-                                                    <p>Moves:</p>
-                                                    {poke.chosen_moves.map((move, idx) => (
-                                                        <p key={idx}>{move.learnable_move.name}</p>
-                                                    ))}
-
+                                                    <ul>
+                                                        {poke.chosen_moves.map((move, idx) => (
+                                                            <li key={idx}>{move.learnable_move.name}</li>
+                                                        ))}
+                                                    </ul>
                                                 </Accordion.Body>
                                             </Accordion.Item>
                                         </Accordion>

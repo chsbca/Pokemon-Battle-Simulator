@@ -92,7 +92,7 @@ export default function ProfilePage() {
         }
 
         // Check for duplicate Pokémon by comparing pokedex numbers
-        if (team.some(p => p.pokedexNumber === pokemon.pokedexNumber)) {
+        if (team.some(p => p.pokedex_Number === pokemon.pokedex_Number)) {
             alert("You cannot use more than 1 of the same Pokémon! Please select another.");
             return; // Exit the function if the Pokémon is already in the team
         }

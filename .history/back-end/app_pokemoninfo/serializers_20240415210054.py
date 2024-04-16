@@ -14,11 +14,11 @@ class TypeEffectivenessBattleSerializer(serializers.ModelSerializer):
 
 class TypeBattleSerializer(serializers.ModelSerializer):
     effectiveness_relations = TypeEffectivenessBattleSerializer(many=True, read_only=True)
-    affected_by_relations = TypeEffectivenessBattleSerializer(many=True, read_only=True)
+    # affected_by_relations = TypeEffectivenessBattleSerializer(many=True, read_only=True)
 
     class Meta:
         model = Type
-        fields = ['name', 'effectiveness_relations', 'affected_by_relations']
+        fields = ['name', 'effectiveness_relations']#, 'affected_by_relations']
 
 class MoveBattleSerializer(serializers.ModelSerializer):
     move_type = TypeBattleSerializer(read_only=True)

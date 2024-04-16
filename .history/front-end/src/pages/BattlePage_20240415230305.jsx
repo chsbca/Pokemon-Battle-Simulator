@@ -77,7 +77,6 @@ const BattlePage = () => {
     };
 
     const handleAttack = (userMove) => {
-        setUserHasAttacked(true)
         if (!userHasAttacked) {
             const userPoke = currentPokemon;
             const cynPoke = cynthiaPokemon;
@@ -107,9 +106,7 @@ const BattlePage = () => {
                 performBattle(cynPoke, userPoke, selectRandomMove(cynPoke), userMove)
             }
         }
-        setTimeout(() => {
-            (setUserHasAttacked(false))
-        }, 2000)
+        setUserHasAttacked(false)
     };
     // change logic for defenderType
     const getTypeEffectiveness = (moveType, defenderTypes) => {
@@ -158,14 +155,10 @@ const BattlePage = () => {
             //if secondAttacker.hp === 0, selectNextCynthiaPokemon()
             if (newHPAfterFirstAttack > 0) {
                 executeAttack(secondAttacker, firstAttacker, secondMove);
-            } else {
+            } else if (newHPAfterFirstAttack === 0) {
                 selectNextCynthiaPokemon()
             }
-        }, 1000);
-
-        if (secondAttacker.pokemon.hp === 0) {
-            selectNextCynthiaPokemon()
-        }
+        }, 1000)
     };
 
     const executeAttack = (attacker, defender, move) => {
@@ -215,7 +208,6 @@ const BattlePage = () => {
             }
         }
         console.log(move.learnable_move.name)
-        console.log(`newHP: ${newHP}`)
         return newHP
     }
 
@@ -231,14 +223,6 @@ const BattlePage = () => {
             return null; // Indicate game over
         }
     };
-
-    const progressBarColor = (currentHP, maxHP) => {
-        const percentage = (currentHP / maxHP) * 100
-        if (percentage > 50) return 'success'
-        if (percentage > 25) return 'warning'
-        return 'danger'
-    }
-
     return (
         <Container className="mt-5 text-center">
             <h1>Battle Page</h1>
@@ -250,22 +234,17 @@ const BattlePage = () => {
                                 <Card.Img variant="top" src={currentPokemon.pokemon.sprite} />
                                 <Card.Body>
                                     <Card.Title>{currentPokemon.pokemon.name}</Card.Title>
-                                    <ProgressBar
-                                        now={(ourTeamHP[currentPokemon.pokemon.pokedex_number] / currentPokemon.pokemon.hp) * 100}
-                                        label={`HP: ${ourTeamHP[currentPokemon.pokemon.pokedex_number]} / ${currentPokemon.pokemon.hp}`}
-                                        variant={progressBarColor(ourTeamHP[currentPokemon.pokemon.pokedex_number], currentPokemon.pokemon.hp)}
-                                    />
+                                    <ProgressBar now={(ourTeamHP[currentPokemon.pokemon.pokedex_number] / currentPokemon.pokemon.hp) * 100} label={`HP: ${ourTeamHP[currentPokemon.pokemon.pokedex_number]} / ${currentPokemon.pokemon.hp}`} />
                                     <Card.Text>Types: {currentPokemon.pokemon.types.map(t => t.name).join(', ')}</Card.Text>
                                     <Tabs defaultActiveKey="fight">
                                         <Tab eventKey="fight" title="Fight">
                                             {currentPokemon.chosen_moves.map((move, index) => (
-                                                <Button key={index} onClick={() => handleAttack(move)} disabled={userHasAttacked}>
+                                                <Button key={index} onClick={() => handleAttack(move)}>
                                                     {move.learnable_move.name}
                                                 </Button>
                                             ))}
                                         </Tab>
                                         <Tab eventKey="switch" title="Switch Pokémon">
-
                                             {ourTeam.map((poke, index) => (
                                                 <Accordion key={index}>
                                                     <Accordion.Item eventKey="0">
@@ -275,12 +254,10 @@ const BattlePage = () => {
                                                         <Accordion.Body>
                                                             <div>
                                                                 <p>Moves:</p>
-                                                                {poke.chosen_moves.map((move, idx) => (
-                                                                    <p key={idx}>{move.learnable_move.name}</p>
-                                                                ))}
+                                                                    {poke.chosen_moves.map((move, idx) => (
+                                                                        <p key={idx}>{move.learnable_move.name}</p>
+                                                                    ))}
                                                             </div>
-                                                            {/* if currentPokemon.pokemon.hp <= 0, nothing
-                                                                if > 0, enemySwitchCounterattack */}
                                                             <Button onClick={() => switchPokemon(poke)}>Select</Button>
                                                         </Accordion.Body>
                                                     </Accordion.Item>
@@ -302,11 +279,7 @@ const BattlePage = () => {
                                 <Card.Img variant="top" src={cynthiaPokemon.pokemon.sprite} />
                                 <Card.Body>
                                     <Card.Title>{cynthiaPokemon.pokemon.name}</Card.Title>
-                                    <ProgressBar
-                                        now={(cynthiaTeamHP[cynthiaPokemon.pokemon.pokedex_number] / cynthiaPokemon.pokemon.hp) * 100}
-                                        label={`HP: ${cynthiaTeamHP[cynthiaPokemon.pokemon.pokedex_number]} / ${cynthiaPokemon.pokemon.hp}`}
-                                        variant={progressBarColor(cynthiaTeamHP[cynthiaPokemon.pokemon.pokedex_number], cynthiaPokemon.pokemon.hp)}
-                                    />
+                                    <ProgressBar now={(cynthiaTeamHP[cynthiaPokemon.pokemon.pokedex_number] / cynthiaPokemon.pokemon.hp) * 100} label={`HP: ${cynthiaTeamHP[cynthiaPokemon.pokemon.pokedex_number]} / ${cynthiaPokemon.pokemon.hp}`} />
                                     <Card.Text>Types: {cynthiaPokemon.pokemon.types.map(t => t.name).join(', ')}</Card.Text>
                                     {cynthiaTeam.map((poke, index) => (
                                         <Accordion key={index}>
@@ -315,11 +288,11 @@ const BattlePage = () => {
                                                     {poke.pokemon.name} - HP: {cynthiaTeamHP[poke.pokemon.pokedex_number]} / {poke.pokemon.hp}
                                                 </Accordion.Header>
                                                 <Accordion.Body>
-                                                    <p>Moves:</p>
-                                                    {poke.chosen_moves.map((move, idx) => (
-                                                        <p key={idx}>{move.learnable_move.name}</p>
-                                                    ))}
-
+                                                <p>Moves:</p>1
+                                                        {poke.chosen_moves.map((move, idx) => (
+                                                            <p key={idx}>{move.learnable_move.name}</p>
+                                                        ))}
+                                                    
                                                 </Accordion.Body>
                                             </Accordion.Item>
                                         </Accordion>
