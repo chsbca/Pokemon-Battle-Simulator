@@ -71,10 +71,11 @@ const BattlePage = () => {
         } else if (currentHP === 0) {
             alert(`${pokemon.pokemon.name} has no HP left and cannot battle!`);
         } else {
+            enemySwitchCounterattack(pokemon)
             setCurrentPokemon(pokemon);
             setEvents(prevEvents => [`${pokemon.pokemon.name} is now in battle!`, ...prevEvents]);
         }
-    };
+    }
 
     const handleAttack = (userMove) => {
         setUserHasAttacked(true)
@@ -167,6 +168,16 @@ const BattlePage = () => {
             selectNextCynthiaPokemon()
         }
     };
+
+    const enemySwitchCounterattack = (newPokemon) => {
+        if (ourTeamHP[currentPokemon.pokemon.pokedex_number] > 0) {
+    // if (currentPokemon.pokemon.hp > 0) {
+            alert("enemy triggers a counterattack!")
+            const randomMove = selectRandomMove(cynthiaPokemon)
+            executeAttack(cynthiaPokemon, newPokemon, randomMove)
+        }
+        return
+    }
 
     const executeAttack = (attacker, defender, move) => {
         const attackStat = attacker.pokemon.attack > attacker.pokemon.special_attack ? attacker.pokemon.attack : attacker.pokemon.special_attack;
