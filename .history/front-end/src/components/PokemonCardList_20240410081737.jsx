@@ -1,0 +1,1 @@
+//file not needed? go to pokemonlistpage.jsx for implementation

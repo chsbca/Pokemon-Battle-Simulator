@@ -1,0 +1,16 @@
+/* Define a keyframe animation for growing effect */
+@keyframes growEffect {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+/* Apply the animation to an element */
+.grow-spinner {
+    animation-name: growEffect;
+    animation-duration: 1s; /* Adjust based on your preference */
+    /* animation-delay will be applied inline to control timing */
+}
