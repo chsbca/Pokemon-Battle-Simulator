@@ -103,4 +103,4 @@ env/
 # Visual Studio Code
 .vscode/
 
-.history/
+.history
