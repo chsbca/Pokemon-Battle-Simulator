@@ -56,7 +56,7 @@ export default function ProfilePage() {
         console.log('Learned moves updated:', learnedMoves);
         // fetchChosenMoves(selectedPokemon.id);
     }, [learnedMoves]);
-    
+
     useEffect(() => {
         console.log('Learnable moves currently in state:', learnableMoves);
     }, [learnableMoves]);
@@ -89,6 +89,12 @@ export default function ProfilePage() {
         if (team.length >= 6) {
             alert("You have 6 Pokémon already! Please remove at least 1 to add more.");
             return; // Exit the function if the team already has 6 Pokémon
+        }
+
+        // Check for duplicate Pokémon by comparing pokedex numbers
+        if (team.some(p => p.pokedexNumber === pokemon.pokedexNumber)) {
+            alert("You cannot use more than 1 of the same Pokémon! Please select another.");
+            return; // Exit the function if the Pokémon is already in the team
         }
 
         console.log('Adding to team:', pokemon);  // This will help verify what data you have

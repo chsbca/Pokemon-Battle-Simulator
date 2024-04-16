@@ -14,7 +14,7 @@ class TypeEffectivenessBattleSerializer(serializers.ModelSerializer):
 
 class TypeBattleSerializer(serializers.ModelSerializer):
     effectiveness_relations = TypeEffectivenessBattleSerializer(many=True, read_only=True)
-    # affected_by_relations = TypeEffectivenessBattleSerializer(many=True, read_only=True)
+    affected_by_relations = TypeEffectivenessBattleSerializer(many=True, read_only=True)
 
     class Meta:
         model = Type
