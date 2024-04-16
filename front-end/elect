@@ -1,0 +1,25 @@
+                            List of relations
+ Schema |                   Name                   | Type  |    Owner    
+--------+------------------------------------------+-------+-------------
+ public | app_moves_move                           | table | prinny9dood
+ public | app_poke_user_poke_user                  | table | prinny9dood
+ public | app_poke_user_poke_user_groups           | table | prinny9dood
+ public | app_poke_user_poke_user_user_permissions | table | prinny9dood
+ public | app_pokemoninfo_chosenmoves              | table | prinny9dood
+ public | app_pokemoninfo_learnablemoves           | table | prinny9dood
+ public | app_pokemoninfo_pokemon                  | table | prinny9dood
+ public | app_pokemoninfo_pokemon_types            | table | prinny9dood
+ public | app_teampokemon_teampokemon              | table | prinny9dood
+ public | app_teams_team                           | table | prinny9dood
+ public | app_types_type                           | table | prinny9dood
+ public | app_types_typeeffectiveness              | table | prinny9dood
+ public | auth_group                               | table | prinny9dood
+ public | auth_group_permissions                   | table | prinny9dood
+ public | auth_permission                          | table | prinny9dood
+ public | authtoken_token                          | table | prinny9dood
+ public | django_admin_log                         | table | prinny9dood
+ public | django_content_type                      | table | prinny9dood
+ public | django_migrations                        | table | prinny9dood
+ public | django_session                           | table | prinny9dood
+(20 rows)
+
