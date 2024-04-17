@@ -11,13 +11,40 @@ const BattlePage = () => {
     const [ourTeamHP, setOurTeamHP] = useState({});
     const [cynthiaTeamHP, setCynthiaTeamHP] = useState({});
     const [userHasAttacked, setUserHasAttacked] = useState(false);
-    const [cynHasAttacked, setCynHasAttacked] = useState(false);
+    // const [cynHasAttacked, setCynHasAttacked] = useState(false);
 
-    useEffect(() => {
+    useEffect(() => { // initial fetch of both teams
         fetchOurTeam();
         fetchCynthiaTeam();
     }, []);
 
+    useEffect(() => { // Check if Cynthia needs to switch or if she's out
+        // Check if the currently active Cynthia's Pokémon has zero HP
+        if (cynthiaPokemon && cynthiaTeamHP[cynthiaPokemon.pokemon.pokedex_number] <= 0) {
+            const nextPokemon = selectNextCynthiaPokemon();
+            if (nextPokemon) {
+                setCynthiaPokemon(nextPokemon);
+            } else {
+                alert("Cynthia has no more Pokémon left! You win!");
+            }
+        }
+    }, [cynthiaPokemon, cynthiaTeamHP])
+
+
+    useEffect(() => { // Check if user needs to switch or if they're out
+        const delayCheck = setTimeout(() => {
+            const totalHP = Object.values(ourTeamHP).reduce((acc, hp) => acc + hp, 0);
+    
+            if (totalHP <= 0) {
+                alert("All your Pokémon have fainted! You've lost the battle.");
+            } else if (currentPokemon && ourTeamHP[currentPokemon.pokemon.pokedex_number] <= 0) {
+                alert("Your current Pokémon has fainted! Please select another Pokémon.")
+            }
+        }, 1000)
+    
+        return () => clearTimeout(delayCheck);
+    }, [ourTeamHP, currentPokemon]);
+    
     const fetchOurTeam = async () => {
         const token = localStorage.getItem('token');
         const headers = { Authorization: `Token ${token}` };
@@ -80,13 +107,14 @@ const BattlePage = () => {
     const handleAttack = (userMove) => {
         setUserHasAttacked(true)
         if (!userHasAttacked) {
+            setEvents([]);
             const userPoke = currentPokemon;
             const cynPoke = cynthiaPokemon;
             const userSpeed = userPoke.pokemon.speed;
             const cynSpeed = cynPoke.pokemon.speed;
 
             if (currentPokemon.pokemon.hp <= 0) {
-                alert("Your current Pokémon has fainted! Please select another Pokémon.")
+                // alert("Your current Pokémon has fainted! Please select another Pokémon.")
                 return; // Stop the function if the user's Pokémon has fainted
             }
 
@@ -108,10 +136,8 @@ const BattlePage = () => {
                 performBattle(cynPoke, userPoke, selectRandomMove(cynPoke), userMove)
             }
         }
-        setTimeout(() => {
-            (setUserHasAttacked(false))
-        }, 2000)
     };
+
     // change logic for defenderType
     const getTypeEffectiveness = (moveType, defenderTypes) => {
         let multiplier = 1
@@ -149,25 +175,29 @@ const BattlePage = () => {
         return pokemon.chosen_moves[randomIndex];
     };
 
-    const performBattle = (firstAttacker, secondAttacker, firstMove, secondMove) => {
-        // Execute the first attack
-        const newHPAfterFirstAttack = executeAttack(firstAttacker, secondAttacker, firstMove)
-
-
-        // Check if the second attacker is still able to fight before counterattacking
-        setTimeout(() => {
-            //if secondAttacker.hp === 0, selectNextCynthiaPokemon()
+    const performBattle = async (firstAttacker, secondAttacker, firstMove, secondMove) => {
+        // Execute the first attack and wait for it to complete
+        const newHPAfterFirstAttack = await executeAttack(firstAttacker, secondAttacker, firstMove);
+    
+        // Use a delay to simulate asynchronous attack timing
+        setTimeout(async () => {
+            // Check if the second attacker is still able to fight before counterattacking
             if (newHPAfterFirstAttack > 0) {
-                executeAttack(secondAttacker, firstAttacker, secondMove);
+                // Execute the second attack
+                await executeAttack(secondAttacker, firstAttacker, secondMove);
             } else {
-                selectNextCynthiaPokemon()
+                // Handle the scenario where the first attacker's move was enough to make the second attacker faint
+                const nextPokemon = selectNextCynthiaPokemon();
+                if (!nextPokemon) {
+                    alert("Cynthia has no more Pokémon left! You win!");
+                }
             }
-        }, 1000);
+            setUserHasAttacked(false)
+        }, 7000);
+    
 
-        if (secondAttacker.pokemon.hp === 0) {
-            selectNextCynthiaPokemon()
-        }
     };
+    
 
     const enemySwitchCounterattack = (newPokemon) => {
         if (ourTeamHP[currentPokemon.pokemon.pokedex_number] > 0) {
@@ -178,20 +208,21 @@ const BattlePage = () => {
         }
         return
     }
-
-    const executeAttack = (attacker, defender, move) => {
+    
+    // console.log(attacker.pokemon.name)
+    // console.log("attack: ", attackStat)
+    // console.log("defense: ", defenseStat)
+    // console.log("power: ", power)
+    // console.log("typeEffect: ", typeEffectiveness)
+    // console.log("STAB: ", stab)
+    // const executeAttack = (attacker, defender, move) => {
+    const executeAttack = async (attacker, defender, move) => {
         const attackStat = attacker.pokemon.attack > attacker.pokemon.special_attack ? attacker.pokemon.attack : attacker.pokemon.special_attack;
         const defenseStat = defender.pokemon.defense > defender.pokemon.special_defense ? defender.pokemon.defense : defender.pokemon.special_defense;
         const power = move.learnable_move.power;
         const typeEffectiveness = getTypeEffectiveness(move.learnable_move.move_type, defender.pokemon.types);
         const stab = attacker.pokemon.types.some(type => type.name === move.learnable_move.move_type.name) ? 1.5 : 1;
 
-        console.log(attacker.pokemon.name)
-        console.log("attack: ", attackStat)
-        console.log("defense: ", defenseStat)
-        console.log("power: ", power)
-        console.log("typeEffect: ", typeEffectiveness)
-        console.log("STAB: ", stab)
 
         const defenderCurrentHP = (attacker === currentPokemon) ? cynthiaTeamHP[defender.pokemon.pokedex_number] : ourTeamHP[defender.pokemon.pokedex_number];
         const damage = Math.floor(((2 * 50 / 5 + 2) * power * (attackStat / defenseStat) / 50 + 2) * stab * typeEffectiveness);
@@ -206,29 +237,53 @@ const BattlePage = () => {
         } else if (typeEffectiveness < 1 && typeEffectiveness > 0) {
             effectivenessMessage = "It's not very effective...";
         } else if (typeEffectiveness === 0) {
-            effectivenessMessage = "It doesn't affect the target...";
+            effectivenessMessage = "It doesn't affect the target..."
         }
 
-        setEvents(prevEvents => [`${attacker.pokemon.name} uses ${move.learnable_move.name} and deals ${damage} damage! ${effectivenessMessage}`, ...prevEvents]);
+        await createBattleEvent(attacker, move, damage, effectivenessMessage);
+        // setEvents(prevEvents => [...prevEvents, `${attacker.pokemon.name} uses ${move.learnable_move.name} and deals ${damage} damage! ${effectivenessMessage}`]);
 
         if (newHP <= 0) {
-            setEvents(prevEvents => [`${defender.pokemon.name} has fainted!`, ...prevEvents]);
+            setEvents(prevEvents => [...prevEvents, `${defender.pokemon.name} has fainted!`]);
             if (attacker === currentPokemon) {
                 // If Cynthia's Pokémon faints, select the next Pokémon
                 const nextPokemon = selectNextCynthiaPokemon();
                 if (nextPokemon) {
-                    setCynthiaPokemon(nextPokemon);
+                    // setCynthiaPokemon(nextPokemon);
                 } else {
                     alert("Cynthia has no more Pokémon left! You win!");
                 }
             } else {
-                alert("Your Pokémon has fainted, please select another to continue.");
+                // alert("Your Pokémon has fainted, please select another to continue.");
+                return
             }
         }
         console.log(move.learnable_move.name)
         console.log(`newHP: ${newHP}`)
         return newHP
     }
+
+    const createBattleEvent = async (attacker, move, damage, effectivenessMessage) => {
+        const postData = {
+            attacker: attacker.pokemon.name,
+            move: move.learnable_move.name,
+            damage: damage.toString(),
+            effectiveness: effectivenessMessage
+        };
+        console.log("Sending battle event data:", postData);
+        try {
+            const response = await axios.post('http://localhost:8000/api/teams/battle_commentary/', postData);
+            const actionDetail = `${attacker.pokemon.name} uses ${move.learnable_move.name} and deals ${damage} damage! ${effectivenessMessage}`;
+    
+            // Update events with the action detail first, then the commentary
+            setEvents(prevEvents => [...prevEvents, actionDetail, response.data.commentary]);
+        } catch (error) {
+            console.error("Error fetching commentary:", error);
+            alert('Failed to fetch battle commentary. Please try again.');
+        }
+    };
+    
+    
 
     const selectNextCynthiaPokemon = () => {
         // Filter out any Pokémon that has no HP left

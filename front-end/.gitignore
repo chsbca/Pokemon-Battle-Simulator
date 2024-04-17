@@ -104,3 +104,5 @@ env/
 .vscode/
 
 .history/
+
+.env
