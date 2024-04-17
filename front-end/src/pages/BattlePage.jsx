@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Card, Button, ProgressBar, Tabs, Tab, Accordion } from 'react-bootstrap';
+import { capitalizeAndFormat } from '../components/formatUtils';
 
 const BattlePage = () => {
     const [ourTeam, setOurTeam] = useState([]);
@@ -96,11 +97,11 @@ const BattlePage = () => {
         if (currentPokemon && pokemon.pokemon.pokedex_number === currentPokemon.pokemon.pokedex_number) {
             alert("This Pokémon is already in battle!");
         } else if (currentHP === 0) {
-            alert(`${pokemon.pokemon.name} has no HP left and cannot battle!`);
+            alert(`${capitalizeAndFormat(pokemon.pokemon.name)} has no HP left and cannot battle!`);
         } else {
             enemySwitchCounterattack(pokemon)
             setCurrentPokemon(pokemon);
-            setEvents(prevEvents => [`${pokemon.pokemon.name} is now in battle!`, ...prevEvents]);
+            setEvents(prevEvents => [`${capitalizeAndFormat(pokemon.pokemon.name)} is now in battle!`, ...prevEvents]);
         }
     }
 
@@ -202,7 +203,7 @@ const BattlePage = () => {
     const enemySwitchCounterattack = (newPokemon) => {
         if (ourTeamHP[currentPokemon.pokemon.pokedex_number] > 0) {
     // if (currentPokemon.pokemon.hp > 0) {
-            alert("enemy triggers a counterattack!")
+            alert("The opponent triggers a counterattack as you switch in!")
             const randomMove = selectRandomMove(cynthiaPokemon)
             executeAttack(cynthiaPokemon, newPokemon, randomMove)
         }
@@ -244,7 +245,7 @@ const BattlePage = () => {
         // setEvents(prevEvents => [...prevEvents, `${attacker.pokemon.name} uses ${move.learnable_move.name} and deals ${damage} damage! ${effectivenessMessage}`]);
 
         if (newHP <= 0) {
-            setEvents(prevEvents => [...prevEvents, `${defender.pokemon.name} has fainted!`]);
+            setEvents(prevEvents => [...prevEvents, `${capitalizeAndFormat(defender.pokemon.name)} has fainted!`]);
             if (attacker === currentPokemon) {
                 // If Cynthia's Pokémon faints, select the next Pokémon
                 const nextPokemon = selectNextCynthiaPokemon();
@@ -273,7 +274,7 @@ const BattlePage = () => {
         console.log("Sending battle event data:", postData);
         try {
             const response = await axios.post('http://localhost:8000/api/teams/battle_commentary/', postData);
-            const actionDetail = `${attacker.pokemon.name} uses ${move.learnable_move.name} and deals ${damage} damage! ${effectivenessMessage}`;
+            const actionDetail = `${capitalizeAndFormat(attacker.pokemon.name)} uses ${capitalizeAndFormat(move.learnable_move.name)} and deals ${damage} damage! ${effectivenessMessage}`;
     
             // Update events with the action detail first, then the commentary
             setEvents(prevEvents => [...prevEvents, actionDetail, response.data.commentary]);
@@ -315,18 +316,18 @@ const BattlePage = () => {
                             <Card>
                                 <Card.Img variant="top" src={currentPokemon.pokemon.sprite} />
                                 <Card.Body>
-                                    <Card.Title>{currentPokemon.pokemon.name}</Card.Title>
+                                    <Card.Title>{capitalizeAndFormat(currentPokemon.pokemon.name)}</Card.Title>
                                     <ProgressBar
                                         now={(ourTeamHP[currentPokemon.pokemon.pokedex_number] / currentPokemon.pokemon.hp) * 100}
                                         label={`HP: ${ourTeamHP[currentPokemon.pokemon.pokedex_number]} / ${currentPokemon.pokemon.hp}`}
                                         variant={progressBarColor(ourTeamHP[currentPokemon.pokemon.pokedex_number], currentPokemon.pokemon.hp)}
                                     />
-                                    <Card.Text>Types: {currentPokemon.pokemon.types.map(t => t.name).join(', ')}</Card.Text>
+                                    <Card.Text>Types: {capitalizeAndFormat(currentPokemon.pokemon.types.map(t => t.name).join(', '))}</Card.Text>
                                     <Tabs defaultActiveKey="fight">
                                         <Tab eventKey="fight" title="Fight">
                                             {currentPokemon.chosen_moves.map((move, index) => (
                                                 <Button key={index} onClick={() => handleAttack(move)} disabled={userHasAttacked}>
-                                                    {move.learnable_move.name}
+                                                    {capitalizeAndFormat(move.learnable_move.name)}
                                                 </Button>
                                             ))}
                                         </Tab>
@@ -336,13 +337,13 @@ const BattlePage = () => {
                                                 <Accordion key={index}>
                                                     <Accordion.Item eventKey="0">
                                                         <Accordion.Header>
-                                                            {poke.pokemon.name} - HP: {ourTeamHP[poke.pokemon.pokedex_number]} / {poke.pokemon.hp}
+                                                            {capitalizeAndFormat(poke.pokemon.name)} - HP: {ourTeamHP[poke.pokemon.pokedex_number]} / {poke.pokemon.hp}
                                                         </Accordion.Header>
                                                         <Accordion.Body>
                                                             <div>
-                                                                <p>Moves:</p>
+                                                                <strong>Moves:</strong>
                                                                 {poke.chosen_moves.map((move, idx) => (
-                                                                    <p key={idx}>{move.learnable_move.name}</p>
+                                                                    <p key={idx}>{capitalizeAndFormat(move.learnable_move.name)}</p>
                                                                 ))}
                                                             </div>
                                                             {/* if currentPokemon.pokemon.hp <= 0, nothing
@@ -367,25 +368,24 @@ const BattlePage = () => {
                             <Card>
                                 <Card.Img variant="top" src={cynthiaPokemon.pokemon.sprite} />
                                 <Card.Body>
-                                    <Card.Title>{cynthiaPokemon.pokemon.name}</Card.Title>
+                                    <Card.Title>{capitalizeAndFormat(cynthiaPokemon.pokemon.name)}</Card.Title>
                                     <ProgressBar
                                         now={(cynthiaTeamHP[cynthiaPokemon.pokemon.pokedex_number] / cynthiaPokemon.pokemon.hp) * 100}
                                         label={`HP: ${cynthiaTeamHP[cynthiaPokemon.pokemon.pokedex_number]} / ${cynthiaPokemon.pokemon.hp}`}
                                         variant={progressBarColor(cynthiaTeamHP[cynthiaPokemon.pokemon.pokedex_number], cynthiaPokemon.pokemon.hp)}
                                     />
-                                    <Card.Text>Types: {cynthiaPokemon.pokemon.types.map(t => t.name).join(', ')}</Card.Text>
+                                    <Card.Text>Types: {capitalizeAndFormat(cynthiaPokemon.pokemon.types.map(t => t.name).join(', '))}</Card.Text>
                                     {cynthiaTeam.map((poke, index) => (
                                         <Accordion key={index}>
                                             <Accordion.Item eventKey={index.toString()}>
                                                 <Accordion.Header>
-                                                    {poke.pokemon.name} - HP: {cynthiaTeamHP[poke.pokemon.pokedex_number]} / {poke.pokemon.hp}
+                                                    {capitalizeAndFormat(poke.pokemon.name)} - HP: {cynthiaTeamHP[poke.pokemon.pokedex_number]} / {poke.pokemon.hp}
                                                 </Accordion.Header>
                                                 <Accordion.Body>
-                                                    <p>Moves:</p>
+                                                    <strong>Moves:</strong>
                                                     {poke.chosen_moves.map((move, idx) => (
-                                                        <p key={idx}>{move.learnable_move.name}</p>
+                                                        <p key={idx}>{capitalizeAndFormat(move.learnable_move.name)}</p>
                                                     ))}
-
                                                 </Accordion.Body>
                                             </Accordion.Item>
                                         </Accordion>
@@ -405,7 +405,7 @@ const BattlePage = () => {
                                 <Card key={pokemon.pokemon.name} style={{ width: '18rem', margin: '10px' }}>
                                     <Card.Body>
                                         <Card.Img variant="top" src={pokemon.pokemon.sprite} />
-                                        <Card.Title>{pokemon.pokemon.name}</Card.Title>
+                                        <Card.Title>{capitalizeAndFormat(pokemon.pokemon.name)}</Card.Title>
                                         <Button variant="primary" onClick={() => initialSelectPokemon(pokemon)}>Select</Button>
                                     </Card.Body>
                                 </Card>
