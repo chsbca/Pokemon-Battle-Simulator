@@ -54,7 +54,7 @@ const PokemonListPage = () => {
                             {/* <img src={pokemon.sprite} className="card-img-top" alt={pokemon.name} /> */}
                             <div className="card-body">
                                 <h5 className="card-title">{capitalizeAndFormat(pokemon.name)}</h5>
-                                <p className="card-text">PokéDex #{pokemon.pokedexNumber}</p>
+                                <p className="card-text">PokeDex #{pokemon.pokedexNumber}</p>
                                 <p className="card-text">Type/s: {capitalizeAndFormat(pokemon.types.join(', '))}</p>
                                 <p className="card-text">HP: {pokemon.stats.hp}</p>
                                 <p className="card-text">Attack: {pokemon.stats.attack}</p>
