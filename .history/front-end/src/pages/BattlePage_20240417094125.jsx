@@ -405,7 +405,7 @@ const BattlePage = () => {
                                 <Card key={pokemon.pokemon.name} style={{ width: '18rem', margin: '10px' }}>
                                     <Card.Body>
                                         <Card.Img variant="top" src={pokemon.pokemon.sprite} />
-                                        <Card.Title>{capitalizeAndFormat(pokemon.pokemon.name)}</Card.Title>
+                                        <Card.Title>{pokemon.pokemon.name}</Card.Title>
                                         <Button variant="primary" onClick={() => initialSelectPokemon(pokemon)}>Select</Button>
                                     </Card.Body>
                                 </Card>

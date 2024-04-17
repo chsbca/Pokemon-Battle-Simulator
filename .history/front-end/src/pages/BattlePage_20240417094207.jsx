@@ -402,10 +402,10 @@ const BattlePage = () => {
                         <h5>They will be fighting first</h5>
                         <div className="d-flex flex-wrap justify-content-center">
                             {ourTeam.map(pokemon => (
-                                <Card key={pokemon.pokemon.name} style={{ width: '18rem', margin: '10px' }}>
+                                <Card key={capitalizeAndFormat(pokemon.pokemon.name)} style={{ width: '18rem', margin: '10px' }}>
                                     <Card.Body>
                                         <Card.Img variant="top" src={pokemon.pokemon.sprite} />
-                                        <Card.Title>{capitalizeAndFormat(pokemon.pokemon.name)}</Card.Title>
+                                        <Card.Title>{pokemon.pokemon.name}</Card.Title>
                                         <Button variant="primary" onClick={() => initialSelectPokemon(pokemon)}>Select</Button>
                                     </Card.Body>
                                 </Card>

@@ -382,10 +382,11 @@ const BattlePage = () => {
                                                     {capitalizeAndFormat(poke.pokemon.name)} - HP: {cynthiaTeamHP[poke.pokemon.pokedex_number]} / {poke.pokemon.hp}
                                                 </Accordion.Header>
                                                 <Accordion.Body>
-                                                    <strong>Moves:</strong>
+                                                    <p>Moves:</p>
                                                     {poke.chosen_moves.map((move, idx) => (
-                                                        <p key={idx}>{capitalizeAndFormat(move.learnable_move.name)}</p>
+                                                        <p key={idx}>{move.learnable_move.name}</p>
                                                     ))}
+
                                                 </Accordion.Body>
                                             </Accordion.Item>
                                         </Accordion>
@@ -405,7 +406,7 @@ const BattlePage = () => {
                                 <Card key={pokemon.pokemon.name} style={{ width: '18rem', margin: '10px' }}>
                                     <Card.Body>
                                         <Card.Img variant="top" src={pokemon.pokemon.sprite} />
-                                        <Card.Title>{capitalizeAndFormat(pokemon.pokemon.name)}</Card.Title>
+                                        <Card.Title>{pokemon.pokemon.name}</Card.Title>
                                         <Button variant="primary" onClick={() => initialSelectPokemon(pokemon)}>Select</Button>
                                     </Card.Body>
                                 </Card>
