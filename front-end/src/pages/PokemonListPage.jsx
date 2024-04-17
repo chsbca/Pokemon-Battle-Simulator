@@ -3,6 +3,7 @@ import axios from 'axios';
 import { fetchPokemon } from "../fetching/PokemonFetch";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Spinner from 'react-bootstrap/Spinner';
+import { capitalizeAndFormat } from "../components/formatUtils";
 
 const PokemonListPage = () => {
     const [pokemonDetails, setPokemonDetails] = useState([]);
@@ -50,12 +51,11 @@ const PokemonListPage = () => {
                 {pokemonDetails.map((pokemon, index) => (
                     <div key={index} className="col-sm-6 col-md-4 col-lg-3 mb-4">
                         <div className="card">
-                            {/* Uncomment and use if sprites are available */}
                             {/* <img src={pokemon.sprite} className="card-img-top" alt={pokemon.name} /> */}
                             <div className="card-body">
-                                <h5 className="card-title">{pokemon.name}</h5>
-                                <p className="card-text">PokeDex #{pokemon.pokedexNumber}</p>
-                                <p className="card-text">Type/s: {pokemon.types.join(', ')}</p>
+                                <h5 className="card-title">{capitalizeAndFormat(pokemon.name)}</h5>
+                                <p className="card-text">PokéDex #{pokemon.pokedexNumber}</p>
+                                <p className="card-text">Type/s: {capitalizeAndFormat(pokemon.types.join(', '))}</p>
                                 <p className="card-text">HP: {pokemon.stats.hp}</p>
                                 <p className="card-text">Attack: {pokemon.stats.attack}</p>
                                 <p className="card-text">Defense: {pokemon.stats.defense}</p>
