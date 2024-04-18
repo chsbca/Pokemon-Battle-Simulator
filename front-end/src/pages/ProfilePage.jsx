@@ -3,6 +3,8 @@ import axios from 'axios';
 import Accordion from 'react-bootstrap/Accordion';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { useUser } from '../components/UserContext'; // Ensure the path is correct
+import { capitalizeAndFormat } from '../components/formatUtils';
+import { Container, Row, Col } from 'react-bootstrap';
 
 export default function ProfilePage() {
     const { user } = useUser();
@@ -214,101 +216,117 @@ export default function ProfilePage() {
     };
 
     return (
-        <div>
-            <h2>Profile Page</h2>
-            <input
-                type="text"
-                placeholder="Search Pokémon..."
-                value={searchTerm}
-                onChange={e => setSearchTerm(e.target.value)}
-                style={{ margin: '10px' }}
-            />
-            <button onClick={handleSearch} className="btn btn-primary" style={{ margin: '5px' }}>Search</button>
-            <button onClick={clearSearchResults} className="btn btn-secondary ms-2">Clear Search Results</button>
-            <h3>Your Pokémon Team:</h3>
-            {isLoading ? <p>Loading...</p> :
-                <Accordion>
-                    {team.length > 0 ? team.map((pokemon, index) => (
-                        <Accordion.Item eventKey={index.toString()} key={index}>
-                            <Accordion.Header>Pokémon {index + 1} - {pokemon.name}
-                            </Accordion.Header>
-                            <Accordion.Body>
-                                <button className="btn btn-info mb-3"
-                                    onClick={() => {
-                                        console.log(`Fetching learnable moves for Pokémon ID: ${pokemon.id} with Pokédex Number: ${pokemon.pokedex_number}`);
-                                        fetchLearnableMoves(pokemon.id, pokemon.pokedex_number, pokemon.name);
-                                    }}>
-                                    View Learnable Moves
-                                </button>
-
-                                <div>Pokédex #{pokemon.pokedex_number}</div>
-                                <div>Types: {pokemon.types.join(', ')}</div>
-                                <div>HP: {pokemon.stats.hp}</div>
-                                <div>Attack: {pokemon.stats.attack}</div>
-                                <div>Defense: {pokemon.stats.defense}</div>
-                                <div>Special Attack: {pokemon.stats.special_attack}</div>
-                                <div>Special Defense: {pokemon.stats.special_defense}</div>
-                                <div>Speed: {pokemon.stats.speed}</div>
-                                <div>Learned Moves:</div>
-                                <ul>
-                                    {pokemon.learnedMoves && pokemon.learnedMoves.length > 0 ? (
-                                        pokemon.learnedMoves.map((move, idx) => (
-                                            <div key={idx}>
-                                                <button onClick={() => removeChosenMove(pokemon.id, move.id)} className="btn btn-danger" style={{ margin: '5px' }}>
-                                                    x
-                                                </button>
-                                                {move.name}</div>
-                                        ))
-                                    ) : (
-                                        <li>No moves learned!</li>
-                                    )}
-                                </ul>
-
-                                <button onClick={() => removeFromTeam(pokemon.pokedex_number)} className="btn btn-danger" style={{ margin: '5px' }}>
-                                    Remove from Team
-                                </button>
-                            </Accordion.Body>
-                        </Accordion.Item>
-                    )) : <p>No Pokémon assigned to your team.</p>}
-                </Accordion>
-            }
-            {searchResults.length > 0 && <h3>Search Results:</h3>}
-            <div style={{ paddingLeft: '20px' }}>
-                {searchResults.map((pokemon, index) => (
-                    <div key={index}>
-                        {pokemon.name}
-                        <button onClick={() => addToTeam(pokemon)} className="btn btn-primary" style={{ margin: '5px' }}>
-                            Add to Team
-                        </button>
+        <div className="main-content">
+            <Container>
+                <div>
+                    {/* <h2>Profile Page</h2> */}
+                    <div style={{ textAlign: 'center' }}>
+                        <img src="/profile.png" alt="Profile" style={{ maxWidth: '30%', height: 'auto' }} />
                     </div>
-                ))}
-            </div>
-            <Offcanvas show={showOffcanvas} onHide={() => setShowOffcanvas(false)} placement="end">
-                <Offcanvas.Header closeButton>
-                    <Offcanvas.Title>{selectedPokemon.name} Moves</Offcanvas.Title>
-                </Offcanvas.Header>
-                <Offcanvas.Body>
-                    {learnableMoves.length ? (
-                        learnableMoves.map((move, idx) => (
-                            <p key={idx}>
-                                <button
-                                    onClick={() => {
-                                        console.log(`Adding move: ${move.name} (ID: ${move.id}) to TeamPokemon (ID: ${selectedPokemon.id})`);
-                                        addChosenMove(move.id);
-                                    }}
-                                    className="btn btn-primary"
-                                    style={{ margin: '5px' }}
-                                >
+
+                    <h3>Your Pokémon Team:</h3>
+                    {isLoading ? <p>Loading...</p> :
+                        <Accordion>
+                            {team.length > 0 ? team.map((pokemon, index) => (
+                                <Accordion.Item eventKey={index.toString()} key={index}>
+                                    <Accordion.Header>Pokémon {index + 1} - {capitalizeAndFormat(pokemon.name)}
+                                    </Accordion.Header>
+                                    <Accordion.Body>
+                                        <Row>
+                                            <Col md={6}> {/* Stats on the left */}
+                                                <div>Pokédex #{pokemon.pokedex_number}</div>
+                                                <div>Types: {capitalizeAndFormat(pokemon.types.join(', '))}</div>
+                                                <div>HP: {pokemon.stats.hp}</div>
+                                                <div>Attack: {pokemon.stats.attack}</div>
+                                                <div>Defense: {pokemon.stats.defense}</div>
+                                                <div>Special Attack: {pokemon.stats.special_attack}</div>
+                                                <div>Special Defense: {pokemon.stats.special_defense}</div>
+                                                <div>Speed: {pokemon.stats.speed}</div>
+                                                <button className="btn btn-info mb-3"
+                                                    onClick={() => {
+                                                        console.log(`Fetching learnable moves for Pokémon ID: ${pokemon.id} with Pokédex Number: ${pokemon.pokedex_number}`);
+                                                        fetchLearnableMoves(pokemon.id, pokemon.pokedex_number, pokemon.name);
+                                                    }}>
+                                                    View Learnable Moves
+                                                </button>
+                                            </Col>
+                                            <Col md={6}> {/* Moves on the right */}
+                                                <div>Learned Moves:</div>
+                                                <ul>
+                                                    {pokemon.learnedMoves && pokemon.learnedMoves.length > 0 ? (
+                                                        pokemon.learnedMoves.map((move, idx) => (
+                                                            <p key={idx} className="mb-2">
+                                                                <button onClick={() => removeChosenMove(pokemon.id, move.id)} className="btn btn-danger mr-2" style={{ margin: '5px' }}>
+                                                                    x
+                                                                </button>
+                                                                {capitalizeAndFormat(move.name)}
+                                                            </p>
+                                                        ))
+                                                    ) : (
+                                                        <li>No moves learned!</li>
+                                                    )}
+                                                </ul>
+                                                <button onClick={() => removeFromTeam(pokemon.pokedex_number)} className="btn btn-danger" style={{ marginTop: '5px' }}>
+                                                    Remove from Team
+                                                </button>
+                                            </Col>
+                                        </Row>
+                                    </Accordion.Body>
+
+                                </Accordion.Item>
+                            )) : <p>No Pokémon assigned to your team.</p>}
+                            <input
+                                type="text"
+                                placeholder="Search Pokémon..."
+                                value={searchTerm}
+                                onChange={e => setSearchTerm(e.target.value)}
+                                style={{ margin: '10px' }}
+                            />
+                            <button onClick={handleSearch} className="btn btn-primary" style={{ margin: '5px' }}>Search</button>
+                            <button onClick={clearSearchResults} className="btn btn-secondary ms-2">Clear Search Results</button>
+                        </Accordion>
+                    }
+                    {searchResults.length > 0 && <h3>Search Results:</h3>}
+                    <div style={{ paddingLeft: '20px' }}>
+                        {searchResults.map((pokemon, index) => (
+                            <div key={index}>
+                                <button onClick={() => addToTeam(pokemon)} className="btn btn-primary" style={{ margin: '5px' }}>
                                     +
                                 </button>
-                                {move.name} (ID: {move.id})
-                            </p>
-                        ))
-                    ) : (
-                        <p>No learnable moves available.</p>
-                    )}
-                </Offcanvas.Body>
-            </Offcanvas>
+                                {capitalizeAndFormat(pokemon.name)}
+
+                            </div>
+                        ))}
+                    </div>
+                    <Offcanvas show={showOffcanvas} onHide={() => setShowOffcanvas(false)} placement="end">
+                        <Offcanvas.Header closeButton>
+                            <Offcanvas.Title>{capitalizeAndFormat(selectedPokemon.name)} Moves</Offcanvas.Title>
+                        </Offcanvas.Header>
+                        <Offcanvas.Body>
+                            {learnableMoves.length ? (
+                                learnableMoves.map((move, idx) => (
+                                    <p key={idx}>
+                                        <button
+                                            onClick={() => {
+                                                console.log(`Adding move: ${move.name} (ID: ${move.id}) to TeamPokemon (ID: ${selectedPokemon.id})`);
+                                                console.log(move)
+                                                addChosenMove(move.id);
+                                            }}
+                                            className="btn btn-primary"
+                                            style={{ margin: '5px' }}
+                                        >
+                                            +
+                                        </button>
+                                        {capitalizeAndFormat(move.name)} (ID: {move.id})
+                                    </p>
+                                ))
+                            ) : (
+                                <p>No learnable moves available.</p>
+                            )}
+                        </Offcanvas.Body>
+                    </Offcanvas>
+                </div>
+            </Container>
         </div>
     );
 }

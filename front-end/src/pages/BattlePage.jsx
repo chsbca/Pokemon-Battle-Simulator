@@ -13,6 +13,8 @@ const BattlePage = () => {
     const [cynthiaTeamHP, setCynthiaTeamHP] = useState({});
     const [userHasAttacked, setUserHasAttacked] = useState(false);
     // const [cynHasAttacked, setCynHasAttacked] = useState(false);
+    const [activeKey, setActiveKey] = useState(null);
+    const [cynthiaActiveKey, setCynthiaActiveKey] = useState(null);
 
     useEffect(() => { // initial fetch of both teams
         fetchOurTeam();
@@ -35,17 +37,17 @@ const BattlePage = () => {
     useEffect(() => { // Check if user needs to switch or if they're out
         const delayCheck = setTimeout(() => {
             const totalHP = Object.values(ourTeamHP).reduce((acc, hp) => acc + hp, 0);
-    
+
             if (totalHP <= 0) {
                 alert("All your Pokémon have fainted! You've lost the battle.");
             } else if (currentPokemon && ourTeamHP[currentPokemon.pokemon.pokedex_number] <= 0) {
                 alert("Your current Pokémon has fainted! Please select another Pokémon.")
             }
         }, 1000)
-    
+
         return () => clearTimeout(delayCheck);
     }, [ourTeamHP, currentPokemon]);
-    
+
     const fetchOurTeam = async () => {
         const token = localStorage.getItem('token');
         const headers = { Authorization: `Token ${token}` };
@@ -93,6 +95,7 @@ const BattlePage = () => {
     };
 
     const switchPokemon = (pokemon) => {
+        setActiveKey(null)
         const currentHP = ourTeamHP[pokemon.pokemon.pokedex_number];
         if (currentPokemon && pokemon.pokemon.pokedex_number === currentPokemon.pokemon.pokedex_number) {
             alert("This Pokémon is already in battle!");
@@ -179,7 +182,7 @@ const BattlePage = () => {
     const performBattle = async (firstAttacker, secondAttacker, firstMove, secondMove) => {
         // Execute the first attack and wait for it to complete
         const newHPAfterFirstAttack = await executeAttack(firstAttacker, secondAttacker, firstMove);
-    
+
         // Use a delay to simulate asynchronous attack timing
         setTimeout(async () => {
             // Check if the second attacker is still able to fight before counterattacking
@@ -195,21 +198,21 @@ const BattlePage = () => {
             }
             setUserHasAttacked(false)
         }, 7000);
-    
+
 
     };
-    
+
 
     const enemySwitchCounterattack = (newPokemon) => {
         if (ourTeamHP[currentPokemon.pokemon.pokedex_number] > 0) {
-    // if (currentPokemon.pokemon.hp > 0) {
+            // if (currentPokemon.pokemon.hp > 0) {
             alert("The opponent triggers a counterattack as you switch in!")
             const randomMove = selectRandomMove(cynthiaPokemon)
             executeAttack(cynthiaPokemon, newPokemon, randomMove)
         }
         return
     }
-    
+
     // console.log(attacker.pokemon.name)
     // console.log("attack: ", attackStat)
     // console.log("defense: ", defenseStat)
@@ -275,7 +278,7 @@ const BattlePage = () => {
         try {
             const response = await axios.post('http://localhost:8000/api/teams/battle_commentary/', postData);
             const actionDetail = `${capitalizeAndFormat(attacker.pokemon.name)} uses ${capitalizeAndFormat(move.learnable_move.name)} and deals ${damage} damage! ${effectivenessMessage}`;
-    
+
             // Update events with the action detail first, then the commentary
             setEvents(prevEvents => [...prevEvents, actionDetail, response.data.commentary]);
         } catch (error) {
@@ -283,8 +286,8 @@ const BattlePage = () => {
             alert('Failed to fetch battle commentary. Please try again.');
         }
     };
-    
-    
+
+
 
     const selectNextCynthiaPokemon = () => {
         // Filter out any Pokémon that has no HP left
@@ -306,115 +309,143 @@ const BattlePage = () => {
         return 'danger'
     }
 
-    return (
-        <Container className="mt-5 text-center">
-            <h1>Battle Page</h1>
-            {currentPokemon && cynthiaPokemon ? (
-                <>
-                    <Row className="justify-content-center">
-                        <Col md={4}>
-                            <Card>
-                                <Card.Img variant="top" src={currentPokemon.pokemon.sprite} />
-                                <Card.Body>
-                                    <Card.Title>{capitalizeAndFormat(currentPokemon.pokemon.name)}</Card.Title>
-                                    <ProgressBar
-                                        now={(ourTeamHP[currentPokemon.pokemon.pokedex_number] / currentPokemon.pokemon.hp) * 100}
-                                        label={`HP: ${ourTeamHP[currentPokemon.pokemon.pokedex_number]} / ${currentPokemon.pokemon.hp}`}
-                                        variant={progressBarColor(ourTeamHP[currentPokemon.pokemon.pokedex_number], currentPokemon.pokemon.hp)}
-                                    />
-                                    <Card.Text>Types: {capitalizeAndFormat(currentPokemon.pokemon.types.map(t => t.name).join(', '))}</Card.Text>
-                                    <Tabs defaultActiveKey="fight">
-                                        <Tab eventKey="fight" title="Fight">
-                                            {currentPokemon.chosen_moves.map((move, index) => (
-                                                <Button key={index} onClick={() => handleAttack(move)} disabled={userHasAttacked}>
-                                                    {capitalizeAndFormat(move.learnable_move.name)}
-                                                </Button>
-                                            ))}
-                                        </Tab>
-                                        <Tab eventKey="switch" title="Switch Pokémon">
+    const handleAccordionChange = (key) => {
+        // Toggle functionality: Click again to close the same accordion
+        if (key === activeKey) {
+            setActiveKey(null);
+        } else {
+            setActiveKey(key);
+        }
+    };
 
-                                            {ourTeam.map((poke, index) => (
-                                                <Accordion key={index}>
-                                                    <Accordion.Item eventKey="0">
-                                                        <Accordion.Header>
-                                                            {capitalizeAndFormat(poke.pokemon.name)} - HP: {ourTeamHP[poke.pokemon.pokedex_number]} / {poke.pokemon.hp}
-                                                        </Accordion.Header>
-                                                        <Accordion.Body>
-                                                            <div>
-                                                                <strong>Moves:</strong>
-                                                                {poke.chosen_moves.map((move, idx) => (
-                                                                    <p key={idx}>{capitalizeAndFormat(move.learnable_move.name)}</p>
-                                                                ))}
-                                                            </div>
-                                                            {/* if currentPokemon.pokemon.hp <= 0, nothing
-                                                                if > 0, enemySwitchCounterattack */}
-                                                            <Button onClick={() => switchPokemon(poke)}>Select</Button>
-                                                        </Accordion.Body>
-                                                    </Accordion.Item>
-                                                </Accordion>
-                                            ))}
-                                        </Tab>
-                                    </Tabs>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        <Col md={3} className="mb-4">
-                            <h2>Battle Log</h2>
-                            {events.map((event, index) => (
-                                <p key={index}>{event}</p>
-                            ))}
-                        </Col>
-                        <Col md={4}>
-                            <Card>
-                                <Card.Img variant="top" src={cynthiaPokemon.pokemon.sprite} />
-                                <Card.Body>
-                                    <Card.Title>{capitalizeAndFormat(cynthiaPokemon.pokemon.name)}</Card.Title>
-                                    <ProgressBar
-                                        now={(cynthiaTeamHP[cynthiaPokemon.pokemon.pokedex_number] / cynthiaPokemon.pokemon.hp) * 100}
-                                        label={`HP: ${cynthiaTeamHP[cynthiaPokemon.pokemon.pokedex_number]} / ${cynthiaPokemon.pokemon.hp}`}
-                                        variant={progressBarColor(cynthiaTeamHP[cynthiaPokemon.pokemon.pokedex_number], cynthiaPokemon.pokemon.hp)}
-                                    />
-                                    <Card.Text>Types: {capitalizeAndFormat(cynthiaPokemon.pokemon.types.map(t => t.name).join(', '))}</Card.Text>
-                                    {cynthiaTeam.map((poke, index) => (
-                                        <Accordion key={index}>
-                                            <Accordion.Item eventKey={index.toString()}>
-                                                <Accordion.Header>
-                                                    {capitalizeAndFormat(poke.pokemon.name)} - HP: {cynthiaTeamHP[poke.pokemon.pokedex_number]} / {poke.pokemon.hp}
-                                                </Accordion.Header>
-                                                <Accordion.Body>
-                                                    <strong>Moves:</strong>
-                                                    {poke.chosen_moves.map((move, idx) => (
-                                                        <p key={idx}>{capitalizeAndFormat(move.learnable_move.name)}</p>
-                                                    ))}
-                                                </Accordion.Body>
-                                            </Accordion.Item>
-                                        </Accordion>
-                                    ))}
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    </Row>
-                </>
-            ) : (
-                <Row className="justify-content-center align-items-center text-center" style={{ minHeight: '100vh' }}>
-                    <Col md={12}>
-                        <h2>Select your Pokémon!</h2>
-                        <h5>They will be fighting first</h5>
-                        <div className="d-flex flex-wrap justify-content-center">
-                            {ourTeam.map(pokemon => (
-                                <Card key={pokemon.pokemon.name} style={{ width: '18rem', margin: '10px' }}>
+    return (
+        <div className="main-content" style={{ marginTop: '20px' }}>
+            <Container className="mt-5 text-center">
+                {/* <h1>Battle Page</h1> */}
+                {currentPokemon && cynthiaPokemon ? (
+                    <>
+                        <Row className="justify-content-center">
+                            <Col md={4}>
+                                <Card>
+                                    <Card.Img variant="top" src={currentPokemon.pokemon.sprite} />
                                     <Card.Body>
-                                        <Card.Img variant="top" src={pokemon.pokemon.sprite} />
-                                        <Card.Title>{capitalizeAndFormat(pokemon.pokemon.name)}</Card.Title>
-                                        <Button variant="primary" onClick={() => initialSelectPokemon(pokemon)}>Select</Button>
+                                        <Card.Title>{capitalizeAndFormat(currentPokemon.pokemon.name)}</Card.Title>
+                                        <ProgressBar
+                                            now={(ourTeamHP[currentPokemon.pokemon.pokedex_number] / currentPokemon.pokemon.hp) * 100}
+                                            label={`HP: ${ourTeamHP[currentPokemon.pokemon.pokedex_number]} / ${currentPokemon.pokemon.hp}`}
+                                            variant={progressBarColor(ourTeamHP[currentPokemon.pokemon.pokedex_number], currentPokemon.pokemon.hp)}
+                                        />
+                                        <Card.Text>Types: {capitalizeAndFormat(currentPokemon.pokemon.types.map(t => t.name).join(', '))}</Card.Text>
+                                        <Tabs defaultActiveKey="fight">
+                                            <Tab eventKey="fight" title="Fight">
+                                                {/* check button disability */}
+                                                <Row>
+                                                    <Col>
+                                                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                                            {currentPokemon.chosen_moves.map((move, index) => (
+                                                                <Button
+                                                                    key={index}
+                                                                    onClick={() => handleAttack(move)}
+                                                                    disabled={userHasAttacked}
+                                                                    className="mb-2" // Adds margin to the bottom of each button
+                                                                    style={{ width: '100%' }} // Makes each button take the full width of the flex container
+                                                                >
+                                                                    {capitalizeAndFormat(move.learnable_move.name)}
+                                                                </Button>
+                                                            ))}
+                                                        </div>
+                                                    </Col>
+                                                </Row>
+                                            </Tab>
+                                            <Tab eventKey="switch" title="Switch Pokémon">
+
+                                                {ourTeam.map((poke, index) => (
+                                                    <Accordion key={index} activeKey={activeKey} onSelect={(key) => handleAccordionChange(key)}>
+                                                        <Accordion.Item eventKey={index.toString()}>
+                                                            <Accordion.Header>
+                                                                {capitalizeAndFormat(poke.pokemon.name)} - HP: {ourTeamHP[poke.pokemon.pokedex_number]} / {poke.pokemon.hp}
+                                                            </Accordion.Header>
+                                                            <Accordion.Body>
+                                                                <div>
+                                                                    <strong>Moves:</strong>
+                                                                    {poke.chosen_moves.map((move, idx) => (
+                                                                        <p key={idx}>{capitalizeAndFormat(move.learnable_move.name)}</p>
+                                                                    ))}
+                                                                </div>
+                                                                <Button onClick={() => switchPokemon(poke)}>Select</Button>
+                                                            </Accordion.Body>
+                                                        </Accordion.Item>
+                                                    </Accordion>
+                                                ))}
+                                            </Tab>
+                                        </Tabs>
                                     </Card.Body>
                                 </Card>
-                            ))}
-                        </div>
-                    </Col>
-                </Row>
-            )}
-        </Container>
+                            </Col>
+                            <Col md={3} className="mb-4">
+                                {/* <h2>Battle Log</h2> */}
+                                <div style={{ textAlign: 'center' }}>
+                                    <img src="/battle.png" alt="Opponent Page" style={{ maxWidth: '50%', height: 'auto' }} />
+                                </div>
+                                {events.map((event, index) => (
+                                    <p key={index}>{event}</p>
+                                ))}
+                            </Col>
+                            <Col md={4}>
+                                <Card>
+                                    <Card.Img variant="top" src={cynthiaPokemon.pokemon.sprite} />
+                                    <Card.Body>
+                                        <Card.Title>{capitalizeAndFormat(cynthiaPokemon.pokemon.name)}</Card.Title>
+                                        <ProgressBar
+                                            now={(cynthiaTeamHP[cynthiaPokemon.pokemon.pokedex_number] / cynthiaPokemon.pokemon.hp) * 100}
+                                            label={`HP: ${cynthiaTeamHP[cynthiaPokemon.pokemon.pokedex_number]} / ${cynthiaPokemon.pokemon.hp}`}
+                                            variant={progressBarColor(cynthiaTeamHP[cynthiaPokemon.pokemon.pokedex_number], cynthiaPokemon.pokemon.hp)}
+                                        />
+                                        <Card.Text>Types: {capitalizeAndFormat(cynthiaPokemon.pokemon.types.map(t => t.name).join(', '))}</Card.Text>
+                                        {cynthiaTeam.map((poke, index) => (
+    <Accordion key={index} activeKey={cynthiaActiveKey} onSelect={(eventKey) => setCynthiaActiveKey(eventKey)}>
+    <Accordion.Item eventKey={index.toString()}>
+        <Accordion.Header>
+            {capitalizeAndFormat(poke.pokemon.name)} - HP: {cynthiaTeamHP[poke.pokemon.pokedex_number]} / {poke.pokemon.hp}
+        </Accordion.Header>
+        <Accordion.Body>
+            <strong>Moves:</strong>
+            {poke.chosen_moves.map((move, idx) => (
+                <p key={idx}>{capitalizeAndFormat(move.learnable_move.name)}</p>
+            ))}
+        </Accordion.Body>
+    </Accordion.Item>
+</Accordion>
+                                        ))}
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        </Row>
+                    </>
+                ) : (
+                    <Row className="justify-content-center align-items-center text-center" style={{ minHeight: '100vh' }}>
+                        <Col md={12}>
+                            {/* <h2>Select your Pokémon!</h2> */}
+                            <div style={{ textAlign: 'center' }}>
+                                <img src="/selectyourpokemon.png" alt="Opponent Page" style={{ maxWidth: '50%', height: 'auto' }} />
+                            </div>
+                            <h5>They will be fighting first!</h5>
+                            <div className="d-flex flex-wrap justify-content-center">
+                                {ourTeam.map(pokemon => (
+                                    <Card key={pokemon.pokemon.name} style={{ width: '18rem', margin: '10px' }}>
+                                        <Card.Body>
+                                            <Card.Img variant="top" src={pokemon.pokemon.sprite} />
+                                            <Card.Title>{capitalizeAndFormat(pokemon.pokemon.name)}</Card.Title>
+                                            <Button variant="primary" onClick={() => initialSelectPokemon(pokemon)}>Select</Button>
+                                        </Card.Body>
+                                    </Card>
+                                ))}
+                            </div>
+                        </Col>
+                    </Row>
+                )}
+            </Container>
+        </div>
     );
 
 }

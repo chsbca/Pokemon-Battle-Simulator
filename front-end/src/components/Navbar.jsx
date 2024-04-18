@@ -26,6 +26,8 @@ export default function NavbarComponent() {
     }
 };
 
+
+
   console.log("Current User in Navbar:", user); // Log the current user state
 
   return (
@@ -46,7 +48,7 @@ export default function NavbarComponent() {
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className="me-auto">
               <Nav.Link as={Link} to="/">Home</Nav.Link>
-              <Nav.Link as={Link} to="pokemon_list/">Pokemon List</Nav.Link>
+              <Nav.Link as={Link} to="pokemon_list/">Pokémon List</Nav.Link>
               <Nav.Link as={Link} to="profile/">Profile/Team</Nav.Link>
               <Nav.Link as={Link} to="opponents/">Opponents</Nav.Link>
               {!user ? (
