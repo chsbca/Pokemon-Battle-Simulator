@@ -1,0 +1,39 @@
+body {
+    background-color: #121212; /* Dark grey background */
+    color: #e0e0e0; /* Light grey text */
+}
+
+button, input, textarea {
+    background-color: #333;
+    color: #ffffff;
+    border: 1px solid #444;
+}
+
+a {
+    color: #bb86fc; /* Light purple for links */
+}
+
+.navbar {
+    background-color: #343a40; /* Dark background for the navbar */
+    color: #ffffff;
+}
+
+.navbar-brand, .navbar-nav .nav-link {
+    color: #ffffff; /* Ensure all text is light */
+}
+
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.card {
+    background-color: #242424;
+    color: #e0e0e0;
+    border: none;
+}
+
+/* Add other component styles as needed */

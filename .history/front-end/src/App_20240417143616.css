@@ -1,0 +1,27 @@
+body {
+    background-color: #121212; /* Dark grey background */
+    color: #e0e0e0; /* Light grey text */
+}
+
+button, input, textarea {
+    background-color: #333;
+    color: #ffffff;
+    border: 1px solid #444;
+}
+
+a {
+    color: #bb86fc; /* Light purple for links */
+}
+
+.navbar, .footer {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+}
+
+.card {
+    background-color: #242424;
+    color: #e0e0e0;
+    border: none;
+}
+
+/* Add other component styles as needed */
