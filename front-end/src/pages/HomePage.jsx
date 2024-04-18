@@ -15,7 +15,9 @@ export default function HomePage() {
                                 <li>Choose up to 4 moves per Pokémon</li>
                                 <li>Choose an opponent to fight</li>
                                 <li>Battle it out!</li>
-                                <li>*Moves in this simulator do not utilize priority, stat changes, status inflictions</li>
+                                <br />
+                                <p>*Moves in this simulator do not utilize priority, stat changes, status inflictions</p>
+                                <p>*Physical/Special move properties have not been applied yet, calculations take in the highest attack/special attack and defense/special defense stat</p>
                             </ul>
                         </div>
                     </Col>

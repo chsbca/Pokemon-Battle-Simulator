@@ -12,7 +12,6 @@ const BattlePage = () => {
     const [ourTeamHP, setOurTeamHP] = useState({});
     const [cynthiaTeamHP, setCynthiaTeamHP] = useState({});
     const [userHasAttacked, setUserHasAttacked] = useState(false);
-    // const [cynHasAttacked, setCynHasAttacked] = useState(false);
     const [activeKey, setActiveKey] = useState(null);
     const [cynthiaActiveKey, setCynthiaActiveKey] = useState(null);
 
@@ -202,7 +201,6 @@ const BattlePage = () => {
 
     };
 
-
     const enemySwitchCounterattack = (newPokemon) => {
         if (ourTeamHP[currentPokemon.pokemon.pokedex_number] > 0) {
             // if (currentPokemon.pokemon.hp > 0) {
@@ -213,13 +211,6 @@ const BattlePage = () => {
         return
     }
 
-    // console.log(attacker.pokemon.name)
-    // console.log("attack: ", attackStat)
-    // console.log("defense: ", defenseStat)
-    // console.log("power: ", power)
-    // console.log("typeEffect: ", typeEffectiveness)
-    // console.log("STAB: ", stab)
-    // const executeAttack = (attacker, defender, move) => {
     const executeAttack = async (attacker, defender, move) => {
         const attackStat = attacker.pokemon.attack > attacker.pokemon.special_attack ? attacker.pokemon.attack : attacker.pokemon.special_attack;
         const defenseStat = defender.pokemon.defense > defender.pokemon.special_defense ? defender.pokemon.defense : defender.pokemon.special_defense;
@@ -286,8 +277,6 @@ const BattlePage = () => {
             alert('Failed to fetch battle commentary. Please try again.');
         }
     };
-
-
 
     const selectNextCynthiaPokemon = () => {
         // Filter out any Pokémon that has no HP left

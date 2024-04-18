@@ -47,7 +47,9 @@ const PokemonListPage = () => {
             const url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
             const response = await fetch(url);
             const data = await response.json();
-            return data.sprites.front_default;  // or any other sprite link you need
+            console.log(data)
+            // return data.sprites.versions['generation-viii'].icons.front_default;
+            return data.sprites.front_default;
         } catch (error) {
             console.error('Failed to fetch Pokémon sprite:', error);
             return null;

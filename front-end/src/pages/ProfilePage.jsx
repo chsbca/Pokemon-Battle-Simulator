@@ -215,6 +215,19 @@ export default function ProfilePage() {
         }
     };
 
+    const fetchPokemonSprite = async (pokemonName) => {
+        try {
+            const url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
+            const response = await fetch(url);
+            const data = await response.json();
+            console.log(data)
+            return data.sprites.versions['generation-viii'].icons.front_default;
+        } catch (error) {
+            console.error('Failed to fetch Pokémon sprite:', error);
+            return null;
+        }
+    };
+
     return (
         <div className="main-content">
             <Container>
