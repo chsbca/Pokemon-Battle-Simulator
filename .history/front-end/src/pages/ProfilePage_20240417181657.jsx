@@ -71,6 +71,10 @@ export default function ProfilePage() {
         }
     }, [selectedPokemon, learnableMoves]); // Only re-run the effect if `selectedPokemon` changes
 
+    useEffect(() => {
+        fetchPokemonSprite(pokemon.name).then(setSpriteUrl);
+    }, [pokemon.name]);
+
 
     const handleSearch = async () => {
         try {
@@ -243,6 +247,7 @@ export default function ProfilePage() {
                             {team.length > 0 ? team.map((pokemon, index) => (
                                 <Accordion.Item eventKey={index.toString()} key={index}>
                                     <Accordion.Header>Pokémon {index + 1} - {capitalizeAndFormat(pokemon.name)}
+                                    {spriteUrl && <img src={spriteUrl} alt={`${pokemon.name} sprite`} style={{ marginLeft: '10px' }} />}
                                     </Accordion.Header>
                                     <Accordion.Body>
                                         <Row>

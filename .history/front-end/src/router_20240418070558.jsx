@@ -31,7 +31,7 @@ const router = createBrowserRouter([
                 path: "/opponents/",
                 element: <OpponentsPage/>
             },
-            {
+            {1
                 path: "/battle/:opponentEmail",
                 element: <ProtectedRoute><BattlePage/></ProtectedRoute>,
             },

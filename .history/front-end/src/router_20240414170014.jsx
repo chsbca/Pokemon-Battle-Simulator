@@ -33,7 +33,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/battle/:opponentEmail",
-                element: <ProtectedRoute><BattlePage/></ProtectedRoute>,
+                element: <BattlePage/>,
             },
             {
                 path: "/login/",

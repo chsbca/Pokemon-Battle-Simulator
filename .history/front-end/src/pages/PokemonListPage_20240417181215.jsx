@@ -48,8 +48,7 @@ const PokemonListPage = () => {
             const response = await fetch(url);
             const data = await response.json();
             console.log(data)
-            // return data.sprites.versions['generation-viii'].icons.front_default;
-            return data.sprites.front_default;
+            return data.sprites.versions['generation-viii'].icons.front_default;
         } catch (error) {
             console.error('Failed to fetch Pokémon sprite:', error);
             return null;

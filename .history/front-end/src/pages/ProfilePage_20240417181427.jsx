@@ -71,6 +71,10 @@ export default function ProfilePage() {
         }
     }, [selectedPokemon, learnableMoves]); // Only re-run the effect if `selectedPokemon` changes
 
+    useEffect(() => {
+        fetchPokemonSprite(pokemon.name).then(setSpriteUrl);
+    }, [pokemon.name]);
+
 
     const handleSearch = async () => {
         try {
