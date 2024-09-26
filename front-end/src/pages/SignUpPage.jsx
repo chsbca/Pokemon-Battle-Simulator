@@ -28,7 +28,7 @@ function SignUpPage() {
     };
 
     return (
-        <div>
+        <div className="main-content" >
             <h2>Sign Up Page</h2>
             <Form onSubmit={handleSignUp}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
