@@ -1,0 +1,798 @@
+[33mcommit deb6e541142955f02d3c8e823d1aac0cade16d78[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: CHRIS <chsbca999@gmail.com>
+Date:   Thu Apr 18 07:27:54 2024 -0700
+
+    day of presentation edits
+
+ front-end/src/pages/BattlePage.jsx              |  11 [31m-----------[m
+ front-end/src/pages/HomePage.jsx                |   4 [32m+++[m[31m-[m
+ front-end/src/pages/LoginPage.jsx               |   2 [32m+[m[31m-[m
+ front-end/src/pages/PokemonListPage.jsx         |   4 [32m+++[m[31m-[m
+ front-end/src/pages/ProfilePage.jsx             |  13 [32m+++++++++++++[m
+ front-end/src/router.jsx                        |   2 [32m+[m[31m-[m
+ storyboards/drawSQL-image-export-2024-04-18.png | Bin [31m0[m -> [32m261772[m bytes
+ 7 files changed, 21 insertions(+), 15 deletions(-)
+
+[33mcommit cdebe0ac9968f478f6c230a74814c1032286c5bb[m
+Author: CHRIS <chsbca999@gmail.com>
+Date:   Wed Apr 17 17:48:47 2024 -0700
+
+    finished for submission!
+
+ front-end/public/battle.png             | Bin [31m0[m -> [32m189979[m bytes
+ front-end/public/chooseyouropponent.png | Bin [31m0[m -> [32m112181[m bytes
+ front-end/public/homepage.png           | Bin [31m0[m -> [32m224426[m bytes
+ front-end/public/pbs.png                | Bin [31m0[m -> [32m111239[m bytes
+ front-end/public/pokemonlist.png        | Bin [31m0[m -> [32m147136[m bytes
+ front-end/public/profile.png            | Bin [31m0[m -> [32m180916[m bytes
+ front-end/public/selectyourpokemon.png  | Bin [31m0[m -> [32m113735[m bytes
+ front-end/public/sinnoh-map.jpg         | Bin [31m0[m -> [32m810844[m bytes
+ front-end/src/App.css                   |  28 [32m++++++[m
+ front-end/src/components/Navbar.jsx     |   4 [32m+[m[31m-[m
+ front-end/src/main.jsx                  |   1 [32m+[m
+ front-end/src/pages/BattlePage.jsx      | 263 [32m++++++++++++++++++++++++++++++[m[31m-----------------------[m
+ front-end/src/pages/HomePage.jsx        |  27 [32m+++++[m[31m-[m
+ front-end/src/pages/OpponentsPage.jsx   |  85 [32m++++++++++[m[31m-------[m
+ front-end/src/pages/PokemonListPage.jsx | 113 [32m+++++++++++++++[m[31m--------[m
+ front-end/src/pages/ProfilePage.jsx     | 198 [32m++++++++++++++++++++++[m[31m------------------[m
+ 16 files changed, 437 insertions(+), 282 deletions(-)
+
+[33mcommit 38a8d20b7f0a73bc621e63a2e1e5ba5b3f34d951[m
+Author: CHRIS <chsbca999@gmail.com>
+Date:   Wed Apr 17 09:46:03 2024 -0700
+
+    finished formatting pokemonlistpage.jsx
+
+ front-end/src/pages/PokemonListPage.jsx | 8 [32m++++[m[31m----[m
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+[33mcommit b24c5c2301ef8c7a4f9fa01d02ea4012c4bfd489[m
+Author: CHRIS <chsbca999@gmail.com>
+Date:   Wed Apr 17 09:43:11 2024 -0700
+
+    created capitalizeAndFormat for capitalizaing and removing hyphens
+
+ front-end/src/components/formatUtils.js |  8 [32m++++++++[m
+ front-end/src/pages/BattlePage.jsx      | 36 [32m++++++++++++++++++[m[31m------------------[m
+ 2 files changed, 26 insertions(+), 18 deletions(-)
+
+[33mcommit e7f2b1bc7ca60c34428d12b2d0b7174f522cf0fe[m
+Author: CHRIS <chsbca999@gmail.com>
+Date:   Wed Apr 17 09:19:01 2024 -0700
+
+    finished openAI integration for commentary
+
+ back-end/.venv/bin/distro                                        |    8 [32m+[m
+ back-end/.venv/bin/httpx                                         |    8 [32m+[m
+ back-end/.venv/bin/openai                                        |    8 [32m+[m
+ back-end/.venv/bin/tqdm                                          |    8 [32m+[m
+ .../python3.10/site-packages/aiohttp-3.9.5.dist-info/INSTALLER   |    1 [32m+[m
+ .../python3.10/site-packages/aiohttp-3.9.5.dist-info/LICENSE.txt |   13 [32m+[m
+ .../python3.10/site-packages/aiohttp-3.9.5.dist-info/METADATA    |  245 [32m++[m
+ .../lib/python3.10/site-packages/aiohttp-3.9.5.dist-info/RECORD  |  119 [32m+[m
+ .../lib/python3.10/site-packages/aiohttp-3.9.5.dist-info/WHEEL   |    6 [32m+[m
+ .../site-packages/aiohttp-3.9.5.dist-info/top_level.txt          |    1 [32m+[m
+ .../lib/python3.10/site-packages/aiohttp/.hash/_cparser.pxd.hash |    1 [32m+[m
+ .../python3.10/site-packages/aiohttp/.hash/_find_header.pxd.hash |    1 [32m+[m
+ .../lib/python3.10/site-packages/aiohttp/.hash/_helpers.pyi.hash |    1 [32m+[m
+ .../lib/python3.10/site-packages/aiohttp/.hash/_helpers.pyx.hash |    1 [32m+[m
+ .../python3.10/site-packages/aiohttp/.hash/_http_parser.pyx.hash |    1 [32m+[m
+ .../python3.10/site-packages/aiohttp/.hash/_http_writer.pyx.hash |    1 [32m+[m
+ .../python3.10/site-packages/aiohttp/.hash/_websocket.pyx.hash   |    1 [32m+[m
+ .../lib/python3.10/site-packages/aiohttp/.hash/hdrs.py.hash      |    1 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/aiohttp/__init__.py  |  240 [32m++[m
+ back-end/.venv/lib/python3.10/site-packages/aiohttp/_cparser.pxd |  158 [32m++[m
+ .../.venv/lib/python3.10/site-packages/aiohttp/_find_header.pxd  |    2 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/aiohttp/_headers.pxi |   83 [32m+[m
+ .../aiohttp/_helpers.cpython-310-x86_64-linux-gnu.so             |  Bin [31m0[m -> [32m508784[m bytes
+ back-end/.venv/lib/python3.10/site-packages/aiohttp/_helpers.pyi |    6 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/aiohttp/_helpers.pyx |   35 [32m+[m
+ .../aiohttp/_http_parser.cpython-310-x86_64-linux-gnu.so         |  Bin [31m0[m -> [32m2586576[m bytes
+ .../.venv/lib/python3.10/site-packages/aiohttp/_http_parser.pyx  |  838 [32m++++++[m
+ .../aiohttp/_http_writer.cpython-310-x86_64-linux-gnu.so         |  Bin [31m0[m -> [32m459368[m bytes
+ .../.venv/lib/python3.10/site-packages/aiohttp/_http_writer.pyx  |  163 [32m++[m
+ .../aiohttp/_websocket.cpython-310-x86_64-linux-gnu.so           |  Bin [31m0[m -> [32m234032[m bytes
+ .../.venv/lib/python3.10/site-packages/aiohttp/_websocket.pyx    |   56 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/aiohttp/abc.py       |  209 [32m++[m
+ .../.venv/lib/python3.10/site-packages/aiohttp/base_protocol.py  |   95 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/aiohttp/client.py    | 1366 [32m+++++++++[m
+ .../lib/python3.10/site-packages/aiohttp/client_exceptions.py    |  346 [32m+++[m
+ .../.venv/lib/python3.10/site-packages/aiohttp/client_proto.py   |  296 [32m++[m
+ .../.venv/lib/python3.10/site-packages/aiohttp/client_reqrep.py  | 1207 [32m++++++++[m
+ back-end/.venv/lib/python3.10/site-packages/aiohttp/client_ws.py |  315 [32m+++[m
+ .../lib/python3.10/site-packages/aiohttp/compression_utils.py    |  157 [32m++[m
+ back-end/.venv/lib/python3.10/site-packages/aiohttp/connector.py | 1511 [32m++++++++++[m
+ back-end/.venv/lib/python3.10/site-packages/aiohttp/cookiejar.py |  419 [32m+++[m
+ back-end/.venv/lib/python3.10/site-packages/aiohttp/formdata.py  |  182 [32m++[m
+ back-end/.venv/lib/python3.10/site-packages/aiohttp/hdrs.py      |  108 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/aiohttp/helpers.py   | 1029 [32m+++++++[m
+ back-end/.venv/lib/python3.10/site-packages/aiohttp/http.py      |   72 [32m+[m
+ .../lib/python3.10/site-packages/aiohttp/http_exceptions.py      |  106 [32m+[m
+ .../.venv/lib/python3.10/site-packages/aiohttp/http_parser.py    | 1041 [32m+++++++[m
+ .../.venv/lib/python3.10/site-packages/aiohttp/http_websocket.py |  740 [32m+++++[m
+ .../.venv/lib/python3.10/site-packages/aiohttp/http_writer.py    |  198 [32m++[m
+ back-end/.venv/lib/python3.10/site-packages/aiohttp/locks.py     |   41 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/aiohttp/log.py       |    8 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/aiohttp/multipart.py | 1015 [32m+++++++[m
+ back-end/.venv/lib/python3.10/site-packages/aiohttp/payload.py   |  463 [32m+++[m
+ .../lib/python3.10/site-packages/aiohttp/payload_streamer.py     |   75 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/aiohttp/py.typed     |    1 [32m+[m
+ .../.venv/lib/python3.10/site-packages/aiohttp/pytest_plugin.py  |  381 [32m+++[m
+ back-end/.venv/lib/python3.10/site-packages/aiohttp/resolver.py  |  160 [32m++[m
+ back-end/.venv/lib/python3.10/site-packages/aiohttp/streams.py   |  684 [32m+++++[m
+ .../.venv/lib/python3.10/site-packages/aiohttp/tcp_helpers.py    |   37 [32m+[m
+ .../.venv/lib/python3.10/site-packages/aiohttp/test_utils.py     |  682 [32m+++++[m
+ back-end/.venv/lib/python3.10/site-packages/aiohttp/tracing.py   |  471 [32m++++[m
+ back-end/.venv/lib/python3.10/site-packages/aiohttp/typedefs.py  |   54 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/aiohttp/web.py       |  616 [32m++++[m
+ back-end/.venv/lib/python3.10/site-packages/aiohttp/web_app.py   |  596 [32m++++[m
+ .../.venv/lib/python3.10/site-packages/aiohttp/web_exceptions.py |  452 [32m+++[m
+ .../lib/python3.10/site-packages/aiohttp/web_fileresponse.py     |  305 [32m++[m
+ back-end/.venv/lib/python3.10/site-packages/aiohttp/web_log.py   |  213 [32m++[m
+ .../lib/python3.10/site-packages/aiohttp/web_middlewares.py      |  116 [32m+[m
+ .../.venv/lib/python3.10/site-packages/aiohttp/web_protocol.py   |  698 [32m+++++[m
+ .../.venv/lib/python3.10/site-packages/aiohttp/web_request.py    |  901 [32m++++++[m
+ .../.venv/lib/python3.10/site-packages/aiohttp/web_response.py   |  819 [32m++++++[m
+ .../.venv/lib/python3.10/site-packages/aiohttp/web_routedef.py   |  216 [32m++[m
+ .../.venv/lib/python3.10/site-packages/aiohttp/web_runner.py     |  409 [32m+++[m
+ .../.venv/lib/python3.10/site-packages/aiohttp/web_server.py     |   77 [32m+[m
+ .../lib/python3.10/site-packages/aiohttp/web_urldispatcher.py    | 1234 [32m++++++++[m
+ back-end/.venv/lib/python3.10/site-packages/aiohttp/web_ws.py    |  539 [32m++++[m
+ back-end/.venv/lib/python3.10/site-packages/aiohttp/worker.py    |  247 [32m++[m
+ .../python3.10/site-packages/aiosignal-1.3.1.dist-info/INSTALLER |    1 [32m+[m
+ .../python3.10/site-packages/aiosignal-1.3.1.dist-info/LICENSE   |  201 [32m++[m
+ .../python3.10/site-packages/aiosignal-1.3.1.dist-info/METADATA  |  128 [32m+[m
+ .../python3.10/site-packages/aiosignal-1.3.1.dist-info/RECORD    |   10 [32m+[m
+ .../lib/python3.10/site-packages/aiosignal-1.3.1.dist-info/WHEEL |    5 [32m+[m
+ .../site-packages/aiosignal-1.3.1.dist-info/top_level.txt        |    1 [32m+[m
+ .../.venv/lib/python3.10/site-packages/aiosignal/__init__.py     |   36 [32m+[m
+ .../.venv/lib/python3.10/site-packages/aiosignal/__init__.pyi    |   12 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/aiosignal/py.typed   |    0
+ .../site-packages/annotated_types-0.6.0.dist-info/INSTALLER      |    1 [32m+[m
+ .../site-packages/annotated_types-0.6.0.dist-info/METADATA       |  242 [32m++[m
+ .../site-packages/annotated_types-0.6.0.dist-info/RECORD         |   10 [32m+[m
+ .../site-packages/annotated_types-0.6.0.dist-info/WHEEL          |    4 [32m+[m
+ .../annotated_types-0.6.0.dist-info/licenses/LICENSE             |   21 [32m+[m
+ .../lib/python3.10/site-packages/annotated_types/__init__.py     |  396 [32m+++[m
+ .../.venv/lib/python3.10/site-packages/annotated_types/py.typed  |    0
+ .../lib/python3.10/site-packages/annotated_types/test_cases.py   |  147 [32m+[m
+ .../lib/python3.10/site-packages/anyio-4.3.0.dist-info/INSTALLER |    1 [32m+[m
+ .../lib/python3.10/site-packages/anyio-4.3.0.dist-info/LICENSE   |   20 [32m+[m
+ .../lib/python3.10/site-packages/anyio-4.3.0.dist-info/METADATA  |  104 [32m+[m
+ .../lib/python3.10/site-packages/anyio-4.3.0.dist-info/RECORD    |   82 [32m+[m
+ .../lib/python3.10/site-packages/anyio-4.3.0.dist-info/WHEEL     |    5 [32m+[m
+ .../site-packages/anyio-4.3.0.dist-info/entry_points.txt         |    2 [32m+[m
+ .../python3.10/site-packages/anyio-4.3.0.dist-info/top_level.txt |    1 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/anyio/__init__.py    |   76 [32m+[m
+ .../lib/python3.10/site-packages/anyio/_backends/__init__.py     |    0
+ .../lib/python3.10/site-packages/anyio/_backends/_asyncio.py     | 2478 [32m++++++++++++++++[m
+ .../.venv/lib/python3.10/site-packages/anyio/_backends/_trio.py  | 1169 [32m++++++++[m
+ .../.venv/lib/python3.10/site-packages/anyio/_core/__init__.py   |    0
+ .../.venv/lib/python3.10/site-packages/anyio/_core/_eventloop.py |  163 [32m++[m
+ .../lib/python3.10/site-packages/anyio/_core/_exceptions.py      |   73 [32m+[m
+ .../.venv/lib/python3.10/site-packages/anyio/_core/_fileio.py    |  645 [32m+++++[m
+ .../.venv/lib/python3.10/site-packages/anyio/_core/_resources.py |   18 [32m+[m
+ .../.venv/lib/python3.10/site-packages/anyio/_core/_signals.py   |   25 [32m+[m
+ .../.venv/lib/python3.10/site-packages/anyio/_core/_sockets.py   |  716 [32m+++++[m
+ .../.venv/lib/python3.10/site-packages/anyio/_core/_streams.py   |   52 [32m+[m
+ .../lib/python3.10/site-packages/anyio/_core/_subprocesses.py    |  140 [32m+[m
+ .../lib/python3.10/site-packages/anyio/_core/_synchronization.py |  649 [32m+++++[m
+ .../.venv/lib/python3.10/site-packages/anyio/_core/_tasks.py     |  158 [32m++[m
+ .../.venv/lib/python3.10/site-packages/anyio/_core/_testing.py   |   74 [32m+[m
+ .../.venv/lib/python3.10/site-packages/anyio/_core/_typedattr.py |   81 [32m+[m
+ .../.venv/lib/python3.10/site-packages/anyio/abc/__init__.py     |   57 [32m+[m
+ .../.venv/lib/python3.10/site-packages/anyio/abc/_eventloop.py   |  392 [32m+++[m
+ .../.venv/lib/python3.10/site-packages/anyio/abc/_resources.py   |   31 [32m+[m
+ .../.venv/lib/python3.10/site-packages/anyio/abc/_sockets.py     |  194 [32m++[m
+ .../.venv/lib/python3.10/site-packages/anyio/abc/_streams.py     |  203 [32m++[m
+ .../lib/python3.10/site-packages/anyio/abc/_subprocesses.py      |   79 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/anyio/abc/_tasks.py  |   97 [32m+[m
+ .../.venv/lib/python3.10/site-packages/anyio/abc/_testing.py     |   66 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/anyio/from_thread.py |  476 [32m++++[m
+ back-end/.venv/lib/python3.10/site-packages/anyio/lowlevel.py    |  163 [32m++[m
+ back-end/.venv/lib/python3.10/site-packages/anyio/py.typed       |    0
+ .../.venv/lib/python3.10/site-packages/anyio/pytest_plugin.py    |  149 [32m+[m
+ .../.venv/lib/python3.10/site-packages/anyio/streams/__init__.py |    0
+ .../.venv/lib/python3.10/site-packages/anyio/streams/buffered.py |  119 [32m+[m
+ .../.venv/lib/python3.10/site-packages/anyio/streams/file.py     |  148 [32m+[m
+ .../.venv/lib/python3.10/site-packages/anyio/streams/memory.py   |  283 [32m++[m
+ .../.venv/lib/python3.10/site-packages/anyio/streams/stapled.py  |  141 [32m+[m
+ .../.venv/lib/python3.10/site-packages/anyio/streams/text.py     |  147 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/anyio/streams/tls.py |  338 [32m+++[m
+ back-end/.venv/lib/python3.10/site-packages/anyio/to_process.py  |  259 [32m++[m
+ back-end/.venv/lib/python3.10/site-packages/anyio/to_thread.py   |   69 [32m+[m
+ .../site-packages/async_timeout-4.0.3.dist-info/INSTALLER        |    1 [32m+[m
+ .../site-packages/async_timeout-4.0.3.dist-info/LICENSE          |   13 [32m+[m
+ .../site-packages/async_timeout-4.0.3.dist-info/METADATA         |  131 [32m+[m
+ .../site-packages/async_timeout-4.0.3.dist-info/RECORD           |   10 [32m+[m
+ .../python3.10/site-packages/async_timeout-4.0.3.dist-info/WHEEL |    5 [32m+[m
+ .../site-packages/async_timeout-4.0.3.dist-info/top_level.txt    |    1 [32m+[m
+ .../site-packages/async_timeout-4.0.3.dist-info/zip-safe         |    1 [32m+[m
+ .../.venv/lib/python3.10/site-packages/async_timeout/__init__.py |  239 [32m++[m
+ .../.venv/lib/python3.10/site-packages/async_timeout/py.typed    |    1 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/attr/__init__.py     |  134 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/attr/__init__.pyi    |  555 [32m++++[m
+ back-end/.venv/lib/python3.10/site-packages/attr/_cmp.py         |  150 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/attr/_cmp.pyi        |   13 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/attr/_compat.py      |   87 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/attr/_config.py      |   31 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/attr/_funcs.py       |  483 [32m++++[m
+ back-end/.venv/lib/python3.10/site-packages/attr/_make.py        | 3119 [32m+++++++++++++++++++++[m
+ back-end/.venv/lib/python3.10/site-packages/attr/_next_gen.py    |  229 [32m++[m
+ .../.venv/lib/python3.10/site-packages/attr/_typing_compat.pyi   |   15 [32m+[m
+ .../.venv/lib/python3.10/site-packages/attr/_version_info.py     |   86 [32m+[m
+ .../.venv/lib/python3.10/site-packages/attr/_version_info.pyi    |    9 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/attr/converters.py   |  144 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/attr/converters.pyi  |   13 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/attr/exceptions.py   |   95 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/attr/exceptions.pyi  |   17 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/attr/filters.py      |   66 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/attr/filters.pyi     |    6 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/attr/py.typed        |    0
+ back-end/.venv/lib/python3.10/site-packages/attr/setters.py      |   73 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/attr/setters.pyi     |   19 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/attr/validators.py   |  681 [32m+++++[m
+ back-end/.venv/lib/python3.10/site-packages/attr/validators.pyi  |   88 [32m+[m
+ .../python3.10/site-packages/attrs-23.2.0.dist-info/INSTALLER    |    1 [32m+[m
+ .../lib/python3.10/site-packages/attrs-23.2.0.dist-info/METADATA |  202 [32m++[m
+ .../lib/python3.10/site-packages/attrs-23.2.0.dist-info/RECORD   |   55 [32m+[m
+ .../lib/python3.10/site-packages/attrs-23.2.0.dist-info/WHEEL    |    4 [32m+[m
+ .../site-packages/attrs-23.2.0.dist-info/licenses/LICENSE        |   21 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/attrs/__init__.py    |   65 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/attrs/__init__.pyi   |   67 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/attrs/converters.py  |    3 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/attrs/exceptions.py  |    3 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/attrs/filters.py     |    3 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/attrs/py.typed       |    0
+ back-end/.venv/lib/python3.10/site-packages/attrs/setters.py     |    3 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/attrs/validators.py  |    3 [32m+[m
+ .../python3.10/site-packages/distro-1.9.0.dist-info/INSTALLER    |    1 [32m+[m
+ .../lib/python3.10/site-packages/distro-1.9.0.dist-info/LICENSE  |  202 [32m++[m
+ .../lib/python3.10/site-packages/distro-1.9.0.dist-info/METADATA |  184 [32m++[m
+ .../lib/python3.10/site-packages/distro-1.9.0.dist-info/RECORD   |   15 [32m+[m
+ .../lib/python3.10/site-packages/distro-1.9.0.dist-info/WHEEL    |    5 [32m+[m
+ .../site-packages/distro-1.9.0.dist-info/entry_points.txt        |    2 [32m+[m
+ .../site-packages/distro-1.9.0.dist-info/top_level.txt           |    1 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/distro/__init__.py   |   54 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/distro/__main__.py   |    4 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/distro/distro.py     | 1403 [32m++++++++++[m
+ back-end/.venv/lib/python3.10/site-packages/distro/py.typed      |    0
+ .../site-packages/exceptiongroup-1.2.0.dist-info/INSTALLER       |    1 [32m+[m
+ .../site-packages/exceptiongroup-1.2.0.dist-info/LICENSE         |   73 [32m+[m
+ .../site-packages/exceptiongroup-1.2.0.dist-info/METADATA        |  155 [32m+[m
+ .../site-packages/exceptiongroup-1.2.0.dist-info/RECORD          |   18 [32m+[m
+ .../site-packages/exceptiongroup-1.2.0.dist-info/WHEEL           |    4 [32m+[m
+ .../lib/python3.10/site-packages/exceptiongroup/__init__.py      |   46 [32m+[m
+ .../.venv/lib/python3.10/site-packages/exceptiongroup/_catch.py  |  138 [32m+[m
+ .../lib/python3.10/site-packages/exceptiongroup/_exceptions.py   |  327 [32m+++[m
+ .../lib/python3.10/site-packages/exceptiongroup/_formatting.py   |  603 [32m++++[m
+ .../lib/python3.10/site-packages/exceptiongroup/_suppress.py     |   40 [32m+[m
+ .../lib/python3.10/site-packages/exceptiongroup/_version.py      |   16 [32m+[m
+ .../.venv/lib/python3.10/site-packages/exceptiongroup/py.typed   |    0
+ .../site-packages/frozenlist-1.4.1.dist-info/INSTALLER           |    1 [32m+[m
+ .../python3.10/site-packages/frozenlist-1.4.1.dist-info/LICENSE  |  201 [32m++[m
+ .../python3.10/site-packages/frozenlist-1.4.1.dist-info/METADATA |  420 [32m+++[m
+ .../python3.10/site-packages/frozenlist-1.4.1.dist-info/RECORD   |   12 [32m+[m
+ .../python3.10/site-packages/frozenlist-1.4.1.dist-info/WHEEL    |    8 [32m+[m
+ .../site-packages/frozenlist-1.4.1.dist-info/top_level.txt       |    1 [32m+[m
+ .../.venv/lib/python3.10/site-packages/frozenlist/__init__.py    |   95 [32m+[m
+ .../.venv/lib/python3.10/site-packages/frozenlist/__init__.pyi   |   47 [32m+[m
+ .../frozenlist/_frozenlist.cpython-310-x86_64-linux-gnu.so       |  Bin [31m0[m -> [32m766040[m bytes
+ .../lib/python3.10/site-packages/frozenlist/_frozenlist.pyx      |  123 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/frozenlist/py.typed  |    1 [32m+[m
+ .../lib/python3.10/site-packages/h11-0.14.0.dist-info/INSTALLER  |    1 [32m+[m
+ .../python3.10/site-packages/h11-0.14.0.dist-info/LICENSE.txt    |   22 [32m+[m
+ .../lib/python3.10/site-packages/h11-0.14.0.dist-info/METADATA   |  193 [32m++[m
+ .../lib/python3.10/site-packages/h11-0.14.0.dist-info/RECORD     |   52 [32m+[m
+ .../lib/python3.10/site-packages/h11-0.14.0.dist-info/WHEEL      |    5 [32m+[m
+ .../python3.10/site-packages/h11-0.14.0.dist-info/top_level.txt  |    1 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/h11/__init__.py      |   62 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/h11/_abnf.py         |  132 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/h11/_connection.py   |  633 [32m+++++[m
+ back-end/.venv/lib/python3.10/site-packages/h11/_events.py       |  369 [32m+++[m
+ back-end/.venv/lib/python3.10/site-packages/h11/_headers.py      |  278 [32m++[m
+ back-end/.venv/lib/python3.10/site-packages/h11/_readers.py      |  247 [32m++[m
+ .../.venv/lib/python3.10/site-packages/h11/_receivebuffer.py     |  153 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/h11/_state.py        |  367 [32m+++[m
+ back-end/.venv/lib/python3.10/site-packages/h11/_util.py         |  135 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/h11/_version.py      |   16 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/h11/_writers.py      |  145 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/h11/py.typed         |    1 [32m+[m
+ .../.venv/lib/python3.10/site-packages/h11/tests/__init__.py     |    0
+ .../.venv/lib/python3.10/site-packages/h11/tests/data/test-file  |    1 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/h11/tests/helpers.py |  101 [32m+[m
+ .../site-packages/h11/tests/test_against_stdlib_http.py          |  115 [32m+[m
+ .../lib/python3.10/site-packages/h11/tests/test_connection.py    | 1122 [32m++++++++[m
+ .../.venv/lib/python3.10/site-packages/h11/tests/test_events.py  |  150 [32m+[m
+ .../.venv/lib/python3.10/site-packages/h11/tests/test_headers.py |  157 [32m++[m
+ .../.venv/lib/python3.10/site-packages/h11/tests/test_helpers.py |   32 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/h11/tests/test_io.py |  572 [32m++++[m
+ .../lib/python3.10/site-packages/h11/tests/test_receivebuffer.py |  135 [32m+[m
+ .../.venv/lib/python3.10/site-packages/h11/tests/test_state.py   |  271 [32m++[m
+ .../.venv/lib/python3.10/site-packages/h11/tests/test_util.py    |  112 [32m+[m
+ .../python3.10/site-packages/httpcore-1.0.5.dist-info/INSTALLER  |    1 [32m+[m
+ .../python3.10/site-packages/httpcore-1.0.5.dist-info/METADATA   |  607 [32m++++[m
+ .../lib/python3.10/site-packages/httpcore-1.0.5.dist-info/RECORD |   68 [32m+[m
+ .../lib/python3.10/site-packages/httpcore-1.0.5.dist-info/WHEEL  |    4 [32m+[m
+ .../site-packages/httpcore-1.0.5.dist-info/licenses/LICENSE.md   |   27 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/httpcore/__init__.py |  139 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/httpcore/_api.py     |   92 [32m+[m
+ .../lib/python3.10/site-packages/httpcore/_async/__init__.py     |   39 [32m+[m
+ .../lib/python3.10/site-packages/httpcore/_async/connection.py   |  220 [32m++[m
+ .../python3.10/site-packages/httpcore/_async/connection_pool.py  |  380 [32m+++[m
+ .../.venv/lib/python3.10/site-packages/httpcore/_async/http11.py |  386 [32m+++[m
+ .../.venv/lib/python3.10/site-packages/httpcore/_async/http2.py  |  589 [32m++++[m
+ .../lib/python3.10/site-packages/httpcore/_async/http_proxy.py   |  368 [32m+++[m
+ .../lib/python3.10/site-packages/httpcore/_async/interfaces.py   |  135 [32m+[m
+ .../lib/python3.10/site-packages/httpcore/_async/socks_proxy.py  |  342 [32m+++[m
+ .../lib/python3.10/site-packages/httpcore/_backends/__init__.py  |    0
+ .../lib/python3.10/site-packages/httpcore/_backends/anyio.py     |  147 [32m+[m
+ .../lib/python3.10/site-packages/httpcore/_backends/auto.py      |   51 [32m+[m
+ .../lib/python3.10/site-packages/httpcore/_backends/base.py      |  103 [32m+[m
+ .../lib/python3.10/site-packages/httpcore/_backends/mock.py      |  142 [32m+[m
+ .../lib/python3.10/site-packages/httpcore/_backends/sync.py      |  239 [32m++[m
+ .../lib/python3.10/site-packages/httpcore/_backends/trio.py      |  161 [32m++[m
+ .../.venv/lib/python3.10/site-packages/httpcore/_exceptions.py   |   81 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/httpcore/_models.py  |  492 [32m++++[m
+ back-end/.venv/lib/python3.10/site-packages/httpcore/_ssl.py     |    9 [32m+[m
+ .../lib/python3.10/site-packages/httpcore/_sync/__init__.py      |   39 [32m+[m
+ .../lib/python3.10/site-packages/httpcore/_sync/connection.py    |  220 [32m++[m
+ .../python3.10/site-packages/httpcore/_sync/connection_pool.py   |  380 [32m+++[m
+ .../.venv/lib/python3.10/site-packages/httpcore/_sync/http11.py  |  386 [32m+++[m
+ .../.venv/lib/python3.10/site-packages/httpcore/_sync/http2.py   |  589 [32m++++[m
+ .../lib/python3.10/site-packages/httpcore/_sync/http_proxy.py    |  368 [32m+++[m
+ .../lib/python3.10/site-packages/httpcore/_sync/interfaces.py    |  135 [32m+[m
+ .../lib/python3.10/site-packages/httpcore/_sync/socks_proxy.py   |  342 [32m+++[m
+ .../lib/python3.10/site-packages/httpcore/_synchronization.py    |  317 [32m+++[m
+ back-end/.venv/lib/python3.10/site-packages/httpcore/_trace.py   |  105 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/httpcore/_utils.py   |   36 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/httpcore/py.typed    |    0
+ .../python3.10/site-packages/httpx-0.27.0.dist-info/INSTALLER    |    1 [32m+[m
+ .../lib/python3.10/site-packages/httpx-0.27.0.dist-info/METADATA |  209 [32m++[m
+ .../lib/python3.10/site-packages/httpx-0.27.0.dist-info/RECORD   |   56 [32m+[m
+ .../lib/python3.10/site-packages/httpx-0.27.0.dist-info/WHEEL    |    4 [32m+[m
+ .../site-packages/httpx-0.27.0.dist-info/entry_points.txt        |    2 [32m+[m
+ .../site-packages/httpx-0.27.0.dist-info/licenses/LICENSE.md     |   12 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/httpx/__init__.py    |  138 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/httpx/__version__.py |    3 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/httpx/_api.py        |  467 [32m++++[m
+ back-end/.venv/lib/python3.10/site-packages/httpx/_auth.py       |  345 [32m+++[m
+ back-end/.venv/lib/python3.10/site-packages/httpx/_client.py     | 2052 [32m++++++++++++++[m
+ back-end/.venv/lib/python3.10/site-packages/httpx/_compat.py     |   41 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/httpx/_config.py     |  370 [32m+++[m
+ back-end/.venv/lib/python3.10/site-packages/httpx/_content.py    |  236 [32m++[m
+ back-end/.venv/lib/python3.10/site-packages/httpx/_decoders.py   |  329 [32m+++[m
+ back-end/.venv/lib/python3.10/site-packages/httpx/_exceptions.py |  347 [32m+++[m
+ back-end/.venv/lib/python3.10/site-packages/httpx/_main.py       |  509 [32m++++[m
+ back-end/.venv/lib/python3.10/site-packages/httpx/_models.py     | 1209 [32m++++++++[m
+ back-end/.venv/lib/python3.10/site-packages/httpx/_multipart.py  |  269 [32m++[m
+ .../.venv/lib/python3.10/site-packages/httpx/_status_codes.py    |  160 [32m++[m
+ .../lib/python3.10/site-packages/httpx/_transports/__init__.py   |    0
+ .../.venv/lib/python3.10/site-packages/httpx/_transports/asgi.py |  181 [32m++[m
+ .../.venv/lib/python3.10/site-packages/httpx/_transports/base.py |   84 [32m+[m
+ .../lib/python3.10/site-packages/httpx/_transports/default.py    |  385 [32m+++[m
+ .../.venv/lib/python3.10/site-packages/httpx/_transports/mock.py |   40 [32m+[m
+ .../.venv/lib/python3.10/site-packages/httpx/_transports/wsgi.py |  146 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/httpx/_types.py      |  134 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/httpx/_urlparse.py   |  502 [32m++++[m
+ back-end/.venv/lib/python3.10/site-packages/httpx/_urls.py       |  646 [32m+++++[m
+ back-end/.venv/lib/python3.10/site-packages/httpx/_utils.py      |  440 [32m+++[m
+ back-end/.venv/lib/python3.10/site-packages/httpx/py.typed       |    0
+ .../python3.10/site-packages/multidict-6.0.5.dist-info/INSTALLER |    1 [32m+[m
+ .../python3.10/site-packages/multidict-6.0.5.dist-info/LICENSE   |   13 [32m+[m
+ .../python3.10/site-packages/multidict-6.0.5.dist-info/METADATA  |  132 [32m+[m
+ .../python3.10/site-packages/multidict-6.0.5.dist-info/RECORD    |   19 [32m+[m
+ .../lib/python3.10/site-packages/multidict-6.0.5.dist-info/WHEEL |    6 [32m+[m
+ .../site-packages/multidict-6.0.5.dist-info/top_level.txt        |    1 [32m+[m
+ .../.venv/lib/python3.10/site-packages/multidict/__init__.py     |   48 [32m+[m
+ .../.venv/lib/python3.10/site-packages/multidict/__init__.pyi    |  152 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/multidict/_abc.py    |   48 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/multidict/_compat.py |   14 [32m+[m
+ .../multidict/_multidict.cpython-310-x86_64-linux-gnu.so         |  Bin [31m0[m -> [32m394656[m bytes
+ .../lib/python3.10/site-packages/multidict/_multidict_base.py    |  144 [32m+[m
+ .../lib/python3.10/site-packages/multidict/_multidict_py.py      |  527 [32m++++[m
+ back-end/.venv/lib/python3.10/site-packages/multidict/py.typed   |    1 [32m+[m
+ .../python3.10/site-packages/openai-0.28.0.dist-info/INSTALLER   |    1 [32m+[m
+ .../lib/python3.10/site-packages/openai-0.28.0.dist-info/LICENSE |   21 [32m+[m
+ .../python3.10/site-packages/openai-0.28.0.dist-info/METADATA    |  361 [32m+++[m
+ .../lib/python3.10/site-packages/openai-0.28.0.dist-info/RECORD  |  121 [32m+[m
+ .../python3.10/site-packages/openai-0.28.0.dist-info/REQUESTED   |    0
+ .../lib/python3.10/site-packages/openai-0.28.0.dist-info/WHEEL   |    5 [32m+[m
+ .../site-packages/openai-0.28.0.dist-info/entry_points.txt       |    2 [32m+[m
+ .../site-packages/openai-0.28.0.dist-info/top_level.txt          |    1 [32m+[m
+ .../python3.10/site-packages/openai-0.28.0.dist-info/zip-safe    |    1 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/openai/__init__.py   |  106 [32m+[m
+ .../.venv/lib/python3.10/site-packages/openai/_openai_scripts.py |   89 [32m+[m
+ .../.venv/lib/python3.10/site-packages/openai/api_requestor.py   |  778 [32m++++++[m
+ .../python3.10/site-packages/openai/api_resources/__init__.py    |   15 [32m+[m
+ .../site-packages/openai/api_resources/abstract/__init__.py      |   13 [32m+[m
+ .../site-packages/openai/api_resources/abstract/api_resource.py  |  172 [32m++[m
+ .../openai/api_resources/abstract/createable_api_resource.py     |   98 [32m+[m
+ .../openai/api_resources/abstract/deletable_api_resource.py      |   48 [32m+[m
+ .../openai/api_resources/abstract/engine_api_resource.py         |  325 [32m+++[m
+ .../openai/api_resources/abstract/listable_api_resource.py       |   95 [32m+[m
+ .../api_resources/abstract/nested_resource_class_methods.py      |  167 [32m++[m
+ .../openai/api_resources/abstract/paginatable_api_resource.py    |  125 [32m+[m
+ .../openai/api_resources/abstract/updateable_api_resource.py     |   16 [32m+[m
+ .../lib/python3.10/site-packages/openai/api_resources/audio.py   |  285 [32m++[m
+ .../site-packages/openai/api_resources/chat_completion.py        |   50 [32m+[m
+ .../python3.10/site-packages/openai/api_resources/completion.py  |   50 [32m+[m
+ .../python3.10/site-packages/openai/api_resources/customer.py    |   17 [32m+[m
+ .../python3.10/site-packages/openai/api_resources/deployment.py  |  119 [32m+[m
+ .../lib/python3.10/site-packages/openai/api_resources/edit.py    |   57 [32m+[m
+ .../python3.10/site-packages/openai/api_resources/embedding.py   |   91 [32m+[m
+ .../lib/python3.10/site-packages/openai/api_resources/engine.py  |   50 [32m+[m
+ .../site-packages/openai/api_resources/error_object.py           |   28 [32m+[m
+ .../site-packages/openai/api_resources/experimental/__init__.py  |    3 [32m+[m
+ .../openai/api_resources/experimental/completion_config.py       |   11 [32m+[m
+ .../lib/python3.10/site-packages/openai/api_resources/file.py    |  279 [32m++[m
+ .../python3.10/site-packages/openai/api_resources/fine_tune.py   |  204 [32m++[m
+ .../python3.10/site-packages/openai/api_resources/fine_tuning.py |   88 [32m+[m
+ .../lib/python3.10/site-packages/openai/api_resources/image.py   |  273 [32m++[m
+ .../lib/python3.10/site-packages/openai/api_resources/model.py   |    5 [32m+[m
+ .../python3.10/site-packages/openai/api_resources/moderation.py  |   45 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/openai/cli.py        | 1410 [32m++++++++++[m
+ .../lib/python3.10/site-packages/openai/datalib/__init__.py      |   14 [32m+[m
+ .../.venv/lib/python3.10/site-packages/openai/datalib/common.py  |   17 [32m+[m
+ .../lib/python3.10/site-packages/openai/datalib/numpy_helper.py  |   15 [32m+[m
+ .../lib/python3.10/site-packages/openai/datalib/pandas_helper.py |   15 [32m+[m
+ .../lib/python3.10/site-packages/openai/embeddings_utils.py      |  252 [32m++[m
+ back-end/.venv/lib/python3.10/site-packages/openai/error.py      |  169 [32m++[m
+ .../.venv/lib/python3.10/site-packages/openai/object_classes.py  |   12 [32m+[m
+ .../.venv/lib/python3.10/site-packages/openai/openai_object.py   |  347 [32m+++[m
+ .../.venv/lib/python3.10/site-packages/openai/openai_response.py |   31 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/openai/py.typed      |    0
+ .../.venv/lib/python3.10/site-packages/openai/tests/__init__.py  |    0
+ .../python3.10/site-packages/openai/tests/asyncio/__init__.py    |    0
+ .../site-packages/openai/tests/asyncio/test_endpoints.py         |   90 [32m+[m
+ .../python3.10/site-packages/openai/tests/test_api_requestor.py  |  101 [32m+[m
+ .../lib/python3.10/site-packages/openai/tests/test_endpoints.py  |  118 [32m+[m
+ .../lib/python3.10/site-packages/openai/tests/test_exceptions.py |   40 [32m+[m
+ .../lib/python3.10/site-packages/openai/tests/test_file_cli.py   |   39 [32m+[m
+ .../site-packages/openai/tests/test_long_examples_validator.py   |   54 [32m+[m
+ .../site-packages/openai/tests/test_url_composition.py           |  209 [32m++[m
+ .../.venv/lib/python3.10/site-packages/openai/tests/test_util.py |   55 [32m+[m
+ .../.venv/lib/python3.10/site-packages/openai/upload_progress.py |   52 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/openai/util.py       |  188 [32m++[m
+ back-end/.venv/lib/python3.10/site-packages/openai/validators.py |  852 [32m++++++[m
+ back-end/.venv/lib/python3.10/site-packages/openai/version.py    |    1 [32m+[m
+ .../.venv/lib/python3.10/site-packages/openai/wandb_logger.py    |  300 [32m++[m
+ .../python3.10/site-packages/pydantic-2.7.0.dist-info/INSTALLER  |    1 [32m+[m
+ .../python3.10/site-packages/pydantic-2.7.0.dist-info/METADATA   | 1033 [32m+++++++[m
+ .../lib/python3.10/site-packages/pydantic-2.7.0.dist-info/RECORD |  205 [32m++[m
+ .../lib/python3.10/site-packages/pydantic-2.7.0.dist-info/WHEEL  |    4 [32m+[m
+ .../site-packages/pydantic-2.7.0.dist-info/licenses/LICENSE      |   21 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/pydantic/__init__.py |  394 [32m+++[m
+ .../lib/python3.10/site-packages/pydantic/_internal/__init__.py  |    0
+ .../lib/python3.10/site-packages/pydantic/_internal/_config.py   |  334 [32m+++[m
+ .../site-packages/pydantic/_internal/_core_metadata.py           |   92 [32m+[m
+ .../python3.10/site-packages/pydantic/_internal/_core_utils.py   |  568 [32m++++[m
+ .../python3.10/site-packages/pydantic/_internal/_dataclasses.py  |  230 [32m++[m
+ .../python3.10/site-packages/pydantic/_internal/_decorators.py   |  791 [32m++++++[m
+ .../site-packages/pydantic/_internal/_decorators_v1.py           |  181 [32m++[m
+ .../site-packages/pydantic/_internal/_discriminated_union.py     |  503 [32m++++[m
+ .../site-packages/pydantic/_internal/_docs_extraction.py         |  107 [32m+[m
+ .../lib/python3.10/site-packages/pydantic/_internal/_fields.py   |  344 [32m+++[m
+ .../python3.10/site-packages/pydantic/_internal/_forward_ref.py  |   23 [32m+[m
+ .../site-packages/pydantic/_internal/_generate_schema.py         | 2303 [32m+++++++++++++++[m
+ .../lib/python3.10/site-packages/pydantic/_internal/_generics.py |  517 [32m++++[m
+ .../lib/python3.10/site-packages/pydantic/_internal/_git.py      |   26 [32m+[m
+ .../site-packages/pydantic/_internal/_internal_dataclass.py      |   10 [32m+[m
+ .../pydantic/_internal/_known_annotated_metadata.py              |  428 [32m+++[m
+ .../python3.10/site-packages/pydantic/_internal/_mock_val_ser.py |  140 [32m+[m
+ .../site-packages/pydantic/_internal/_model_construction.py      |  713 [32m+++++[m
+ .../lib/python3.10/site-packages/pydantic/_internal/_repr.py     |  117 [32m+[m
+ .../pydantic/_internal/_schema_generation_shared.py              |  124 [32m+[m
+ .../python3.10/site-packages/pydantic/_internal/_signature.py    |  164 [32m++[m
+ .../site-packages/pydantic/_internal/_std_types_schema.py        |  715 [32m+++++[m
+ .../python3.10/site-packages/pydantic/_internal/_typing_extra.py |  494 [32m++++[m
+ .../lib/python3.10/site-packages/pydantic/_internal/_utils.py    |  362 [32m+++[m
+ .../site-packages/pydantic/_internal/_validate_call.py           |   84 [32m+[m
+ .../python3.10/site-packages/pydantic/_internal/_validators.py   |  289 [32m++[m
+ .../.venv/lib/python3.10/site-packages/pydantic/_migration.py    |  308 [32m++[m
+ .../lib/python3.10/site-packages/pydantic/alias_generators.py    |   50 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/pydantic/aliases.py  |  112 [32m+[m
+ .../lib/python3.10/site-packages/pydantic/annotated_handlers.py  |  120 [32m+[m
+ .../lib/python3.10/site-packages/pydantic/class_validators.py    |    4 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/pydantic/color.py    |  603 [32m++++[m
+ back-end/.venv/lib/python3.10/site-packages/pydantic/config.py   | 1003 [32m+++++++[m
+ .../.venv/lib/python3.10/site-packages/pydantic/dataclasses.py   |  327 [32m+++[m
+ .../lib/python3.10/site-packages/pydantic/datetime_parse.py      |    4 [32m+[m
+ .../.venv/lib/python3.10/site-packages/pydantic/decorator.py     |    4 [32m+[m
+ .../lib/python3.10/site-packages/pydantic/deprecated/__init__.py |    0
+ .../site-packages/pydantic/deprecated/class_validators.py        |  265 [32m++[m
+ .../lib/python3.10/site-packages/pydantic/deprecated/config.py   |   72 [32m+[m
+ .../site-packages/pydantic/deprecated/copy_internals.py          |  224 [32m++[m
+ .../python3.10/site-packages/pydantic/deprecated/decorator.py    |  279 [32m++[m
+ .../lib/python3.10/site-packages/pydantic/deprecated/json.py     |  140 [32m+[m
+ .../lib/python3.10/site-packages/pydantic/deprecated/parse.py    |   80 [32m+[m
+ .../lib/python3.10/site-packages/pydantic/deprecated/tools.py    |  103 [32m+[m
+ .../.venv/lib/python3.10/site-packages/pydantic/env_settings.py  |    4 [32m+[m
+ .../lib/python3.10/site-packages/pydantic/error_wrappers.py      |    4 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/pydantic/errors.py   |  153 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/pydantic/fields.py   | 1237 [32m++++++++[m
+ .../python3.10/site-packages/pydantic/functional_serializers.py  |  399 [32m+++[m
+ .../python3.10/site-packages/pydantic/functional_validators.py   |  709 [32m+++++[m
+ back-end/.venv/lib/python3.10/site-packages/pydantic/generics.py |    4 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/pydantic/json.py     |    4 [32m+[m
+ .../.venv/lib/python3.10/site-packages/pydantic/json_schema.py   | 2493 [32m+++++++++++++++++[m
+ back-end/.venv/lib/python3.10/site-packages/pydantic/main.py     | 1541 [32m++++++++++[m
+ back-end/.venv/lib/python3.10/site-packages/pydantic/mypy.py     | 1284 [32m+++++++++[m
+ back-end/.venv/lib/python3.10/site-packages/pydantic/networks.py |  732 [32m+++++[m
+ back-end/.venv/lib/python3.10/site-packages/pydantic/parse.py    |    4 [32m+[m
+ .../lib/python3.10/site-packages/pydantic/plugin/__init__.py     |  170 [32m++[m
+ .../lib/python3.10/site-packages/pydantic/plugin/_loader.py      |   56 [32m+[m
+ .../site-packages/pydantic/plugin/_schema_validator.py           |  138 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/pydantic/py.typed    |    0
+ .../.venv/lib/python3.10/site-packages/pydantic/root_model.py    |  155 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/pydantic/schema.py   |    4 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/pydantic/tools.py    |    4 [32m+[m
+ .../.venv/lib/python3.10/site-packages/pydantic/type_adapter.py  |  473 [32m++++[m
+ back-end/.venv/lib/python3.10/site-packages/pydantic/types.py    | 2996 [32m++++++++++++++++++++[m
+ back-end/.venv/lib/python3.10/site-packages/pydantic/typing.py   |    4 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/pydantic/utils.py    |    4 [32m+[m
+ .../.venv/lib/python3.10/site-packages/pydantic/v1/__init__.py   |  131 [32m+[m
+ .../python3.10/site-packages/pydantic/v1/_hypothesis_plugin.py   |  391 [32m+++[m
+ .../lib/python3.10/site-packages/pydantic/v1/annotated_types.py  |   72 [32m+[m
+ .../lib/python3.10/site-packages/pydantic/v1/class_validators.py |  361 [32m+++[m
+ back-end/.venv/lib/python3.10/site-packages/pydantic/v1/color.py |  494 [32m++++[m
+ .../.venv/lib/python3.10/site-packages/pydantic/v1/config.py     |  191 [32m++[m
+ .../lib/python3.10/site-packages/pydantic/v1/dataclasses.py      |  500 [32m++++[m
+ .../lib/python3.10/site-packages/pydantic/v1/datetime_parse.py   |  248 [32m++[m
+ .../.venv/lib/python3.10/site-packages/pydantic/v1/decorator.py  |  264 [32m++[m
+ .../lib/python3.10/site-packages/pydantic/v1/env_settings.py     |  350 [32m+++[m
+ .../lib/python3.10/site-packages/pydantic/v1/error_wrappers.py   |  161 [32m++[m
+ .../.venv/lib/python3.10/site-packages/pydantic/v1/errors.py     |  646 [32m+++++[m
+ .../.venv/lib/python3.10/site-packages/pydantic/v1/fields.py     | 1253 [32m+++++++++[m
+ .../.venv/lib/python3.10/site-packages/pydantic/v1/generics.py   |  400 [32m+++[m
+ back-end/.venv/lib/python3.10/site-packages/pydantic/v1/json.py  |  112 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/pydantic/v1/main.py  | 1107 [32m++++++++[m
+ back-end/.venv/lib/python3.10/site-packages/pydantic/v1/mypy.py  |  944 [32m+++++++[m
+ .../.venv/lib/python3.10/site-packages/pydantic/v1/networks.py   |  747 [32m+++++[m
+ back-end/.venv/lib/python3.10/site-packages/pydantic/v1/parse.py |   66 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/pydantic/v1/py.typed |    0
+ .../.venv/lib/python3.10/site-packages/pydantic/v1/schema.py     | 1163 [32m++++++++[m
+ back-end/.venv/lib/python3.10/site-packages/pydantic/v1/tools.py |   92 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/pydantic/v1/types.py | 1205 [32m++++++++[m
+ .../.venv/lib/python3.10/site-packages/pydantic/v1/typing.py     |  603 [32m++++[m
+ back-end/.venv/lib/python3.10/site-packages/pydantic/v1/utils.py |  803 [32m++++++[m
+ back-end/.venv/lib/python3.10/site-packages/pydantic/v1/v1.py    |  116 [32m+[m
+ .../.venv/lib/python3.10/site-packages/pydantic/v1/validators.py |  765 [32m+++++[m
+ .../.venv/lib/python3.10/site-packages/pydantic/v1/version.py    |   38 [32m+[m
+ .../python3.10/site-packages/pydantic/validate_call_decorator.py |   68 [32m+[m
+ .../.venv/lib/python3.10/site-packages/pydantic/validators.py    |    4 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/pydantic/version.py  |   77 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/pydantic/warnings.py |   58 [32m+[m
+ .../site-packages/pydantic_core-2.18.1.dist-info/INSTALLER       |    1 [32m+[m
+ .../site-packages/pydantic_core-2.18.1.dist-info/METADATA        |  160 [32m++[m
+ .../site-packages/pydantic_core-2.18.1.dist-info/RECORD          |   12 [32m+[m
+ .../site-packages/pydantic_core-2.18.1.dist-info/WHEEL           |    4 [32m+[m
+ .../pydantic_core-2.18.1.dist-info/license_files/LICENSE         |   21 [32m+[m
+ .../.venv/lib/python3.10/site-packages/pydantic_core/__init__.py |  139 [32m+[m
+ .../pydantic_core/_pydantic_core.cpython-310-x86_64-linux-gnu.so |  Bin [31m0[m -> [32m5022488[m bytes
+ .../python3.10/site-packages/pydantic_core/_pydantic_core.pyi    |  901 [32m++++++[m
+ .../lib/python3.10/site-packages/pydantic_core/core_schema.py    | 4045 [32m+++++++++++++++++++++++++++[m
+ .../.venv/lib/python3.10/site-packages/pydantic_core/py.typed    |    0
+ .../python3.10/site-packages/sniffio-1.3.1.dist-info/INSTALLER   |    1 [32m+[m
+ .../lib/python3.10/site-packages/sniffio-1.3.1.dist-info/LICENSE |    3 [32m+[m
+ .../site-packages/sniffio-1.3.1.dist-info/LICENSE.APACHE2        |  202 [32m++[m
+ .../python3.10/site-packages/sniffio-1.3.1.dist-info/LICENSE.MIT |   20 [32m+[m
+ .../python3.10/site-packages/sniffio-1.3.1.dist-info/METADATA    |  104 [32m+[m
+ .../lib/python3.10/site-packages/sniffio-1.3.1.dist-info/RECORD  |   19 [32m+[m
+ .../lib/python3.10/site-packages/sniffio-1.3.1.dist-info/WHEEL   |    5 [32m+[m
+ .../site-packages/sniffio-1.3.1.dist-info/top_level.txt          |    1 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/sniffio/__init__.py  |   17 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/sniffio/_impl.py     |   95 [32m+[m
+ .../lib/python3.10/site-packages/sniffio/_tests/__init__.py      |    0
+ .../lib/python3.10/site-packages/sniffio/_tests/test_sniffio.py  |   84 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/sniffio/_version.py  |    3 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/sniffio/py.typed     |    0
+ .../lib/python3.10/site-packages/tqdm-4.66.2.dist-info/INSTALLER |    1 [32m+[m
+ .../lib/python3.10/site-packages/tqdm-4.66.2.dist-info/LICENCE   |   49 [32m+[m
+ .../lib/python3.10/site-packages/tqdm-4.66.2.dist-info/METADATA  | 1590 [32m+++++++++++[m
+ .../lib/python3.10/site-packages/tqdm-4.66.2.dist-info/RECORD    |   74 [32m+[m
+ .../lib/python3.10/site-packages/tqdm-4.66.2.dist-info/WHEEL     |    5 [32m+[m
+ .../site-packages/tqdm-4.66.2.dist-info/entry_points.txt         |    2 [32m+[m
+ .../python3.10/site-packages/tqdm-4.66.2.dist-info/top_level.txt |    1 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/tqdm/__init__.py     |   38 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/tqdm/__main__.py     |    3 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/tqdm/_dist_ver.py    |    1 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/tqdm/_main.py        |    9 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/tqdm/_monitor.py     |   95 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/tqdm/_tqdm.py        |    9 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/tqdm/_tqdm_gui.py    |    9 [32m+[m
+ .../.venv/lib/python3.10/site-packages/tqdm/_tqdm_notebook.py    |    9 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/tqdm/_tqdm_pandas.py |   24 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/tqdm/_utils.py       |   11 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/tqdm/asyncio.py      |   93 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/tqdm/auto.py         |   40 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/tqdm/autonotebook.py |   29 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/tqdm/cli.py          |  311 [32m++[m
+ back-end/.venv/lib/python3.10/site-packages/tqdm/completion.sh   |   19 [32m+[m
+ .../.venv/lib/python3.10/site-packages/tqdm/contrib/__init__.py  |   92 [32m+[m
+ .../.venv/lib/python3.10/site-packages/tqdm/contrib/bells.py     |   26 [32m+[m
+ .../lib/python3.10/site-packages/tqdm/contrib/concurrent.py      |  105 [32m+[m
+ .../.venv/lib/python3.10/site-packages/tqdm/contrib/discord.py   |  119 [32m+[m
+ .../.venv/lib/python3.10/site-packages/tqdm/contrib/itertools.py |   35 [32m+[m
+ .../.venv/lib/python3.10/site-packages/tqdm/contrib/logging.py   |  126 [32m+[m
+ .../.venv/lib/python3.10/site-packages/tqdm/contrib/slack.py     |  120 [32m+[m
+ .../.venv/lib/python3.10/site-packages/tqdm/contrib/telegram.py  |  153 [32m+[m
+ .../lib/python3.10/site-packages/tqdm/contrib/utils_worker.py    |   38 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/tqdm/dask.py         |   44 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/tqdm/gui.py          |  186 [32m++[m
+ back-end/.venv/lib/python3.10/site-packages/tqdm/keras.py        |  122 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/tqdm/notebook.py     |  317 [32m+++[m
+ back-end/.venv/lib/python3.10/site-packages/tqdm/rich.py         |  150 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/tqdm/std.py          | 1524 [32m++++++++++[m
+ back-end/.venv/lib/python3.10/site-packages/tqdm/tk.py           |  196 [32m++[m
+ back-end/.venv/lib/python3.10/site-packages/tqdm/tqdm.1          |  314 [32m+++[m
+ back-end/.venv/lib/python3.10/site-packages/tqdm/utils.py        |  399 [32m+++[m
+ back-end/.venv/lib/python3.10/site-packages/tqdm/version.py      |    9 [32m+[m
+ .../lib/python3.10/site-packages/yarl-1.9.4.dist-info/INSTALLER  |    1 [32m+[m
+ .../lib/python3.10/site-packages/yarl-1.9.4.dist-info/LICENSE    |  202 [32m++[m
+ .../lib/python3.10/site-packages/yarl-1.9.4.dist-info/METADATA   | 1086 [32m+++++++[m
+ .../lib/python3.10/site-packages/yarl-1.9.4.dist-info/NOTICE     |   13 [32m+[m
+ .../lib/python3.10/site-packages/yarl-1.9.4.dist-info/RECORD     |   20 [32m+[m
+ .../lib/python3.10/site-packages/yarl-1.9.4.dist-info/WHEEL      |    6 [32m+[m
+ .../python3.10/site-packages/yarl-1.9.4.dist-info/top_level.txt  |    1 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/yarl/__init__.py     |    5 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/yarl/__init__.pyi    |  121 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/yarl/_quoting.py     |   18 [32m+[m
+ .../yarl/_quoting_c.cpython-310-x86_64-linux-gnu.so              |  Bin [31m0[m -> [32m904208[m bytes
+ back-end/.venv/lib/python3.10/site-packages/yarl/_quoting_c.pyi  |   16 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/yarl/_quoting_c.pyx  |  371 [32m+++[m
+ back-end/.venv/lib/python3.10/site-packages/yarl/_quoting_py.py  |  197 [32m++[m
+ back-end/.venv/lib/python3.10/site-packages/yarl/_url.py         | 1200 [32m++++++++[m
+ back-end/.venv/lib/python3.10/site-packages/yarl/py.typed        |    1 [32m+[m
+ back-end/app_teams/openai_utils.py                               |   44 [32m+[m
+ back-end/app_teams/urls.py                                       |    3 [32m+[m[31m-[m
+ back-end/app_teams/views.py                                      |   36 [32m+[m[31m-[m
+ back-end/manage.py                                               |    4 [32m+[m
+ back-end/pbs_proj/settings.py                                    |   32 [32m+[m[31m-[m
+ back-end/requirements.txt                                        |   12 [32m+[m
+ front-end/.gitignore                                             |    4 [32m+[m[31m-[m
+ front-end/src/pages/BattlePage.jsx                               |  123 [32m+[m[31m-[m
+ 590 files changed, 134581 insertions(+), 41 deletions(-)
+
+[33mcommit f65bbde5e3c4ea543ccea0ee24ce31768ec23bbd[m
+Author: CHRIS <chsbca999@gmail.com>
+Date:   Tue Apr 16 08:38:26 2024 -0700
+
+    starting to integrate openAI (chatgpt) into project
+
+ back-end/app_teams/openai_utils.py | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+[33mcommit b07df8136a311995bcbe9dcd1212900b2256de9b[m
+Author: CHRIS <chsbca999@gmail.com>
+Date:   Tue Apr 16 01:31:39 2024 -0700
+
+    testing .history changes
+
+ back-end/.gitignore  | 2 [32m+[m[31m-[m
+ front-end/.gitignore | 2 [32m+[m[31m-[m
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+[33mcommit ced54ad9ecb8e766bce865a63f985cd189e6b4f7[m
+Author: CHRIS <chsbca999@gmail.com>
+Date:   Tue Apr 16 01:11:49 2024 -0700
+
+    various bug fixes
+
+ front-end/src/pages/BattlePage.jsx | 13 [32m++++++++++++[m[31m-[m
+ 1 file changed, 12 insertions(+), 1 deletion(-)
+
+[33mcommit f0b0c259abacdffa348d1073cd853412ac6a1615[m
+Author: CHRIS <chsbca999@gmail.com>
+Date:   Mon Apr 15 23:44:21 2024 -0700
+
+    several bug fixes
+
+ back-end/.gitignore                     |   1 [32m+[m
+ back-end/app_pokemoninfo/serializers.py |   2 [32m+[m[31m-[m
+ front-end/.gitignore                    |   2 [32m+[m
+ front-end/src/pages/BattlePage.jsx      | 205 [32m++++++++++++++++++++++++++++++++++[m[31m-------------------[m
+ front-end/src/pages/ProfilePage.jsx     |   8 [32m++[m[31m-[m
+ 5 files changed, 145 insertions(+), 73 deletions(-)
+
+[33mcommit 3be16596194d169da93788d8722f3b28dba486cc[m
+Author: CHRIS <chsbca999@gmail.com>
+Date:   Mon Apr 15 18:15:44 2024 -0700
+
+    MVP done! will debug pokemon battle logic flow further, finish homepage.jsx, and polish up more CSS stuff
+
+ README.md                                                        |     0
+ To-Do.md                                                         |    54 [32m+[m
+ back-end/.gitignore                                              |     2 [32m+[m
+ back-end/.venv/bin/Activate.ps1                                  |   247 [32m+[m
+ back-end/.venv/bin/activate                                      |    69 [32m+[m
+ back-end/.venv/bin/activate.csh                                  |    26 [32m+[m
+ back-end/.venv/bin/activate.fish                                 |    69 [32m+[m
+ back-end/.venv/bin/django-admin                                  |     8 [32m+[m
+ back-end/.venv/bin/dotenv                                        |     8 [32m+[m
+ back-end/.venv/bin/normalizer                                    |     8 [32m+[m
+ back-end/.venv/bin/pip                                           |     8 [32m+[m
+ back-end/.venv/bin/pip3                                          |     8 [32m+[m
+ back-end/.venv/bin/pip3.10                                       |     8 [32m+[m
+ back-end/.venv/bin/python                                        |     1 [32m+[m
+ back-end/.venv/bin/python3                                       |     1 [32m+[m
+ back-end/.venv/bin/python3.10                                    |     1 [32m+[m
+ back-end/.venv/bin/sqlformat                                     |     8 [32m+[m
+ .../lib/python3.10/site-packages/Django-5.0.4.dist-info/AUTHORS  |  1088 [32m+++[m
+ .../python3.10/site-packages/Django-5.0.4.dist-info/INSTALLER    |     1 [32m+[m
+ .../lib/python3.10/site-packages/Django-5.0.4.dist-info/LICENSE  |    27 [32m+[m
+ .../site-packages/Django-5.0.4.dist-info/LICENSE.python          |   290 [32m+[m
+ .../lib/python3.10/site-packages/Django-5.0.4.dist-info/METADATA |   100 [32m+[m
+ .../lib/python3.10/site-packages/Django-5.0.4.dist-info/RECORD   |  4537 [32m+++++++++++[m
+ .../python3.10/site-packages/Django-5.0.4.dist-info/REQUESTED    |     0
+ .../lib/python3.10/site-packages/Django-5.0.4.dist-info/WHEEL    |     5 [32m+[m
+ .../site-packages/Django-5.0.4.dist-info/entry_points.txt        |     2 [32m+[m
+ .../site-packages/Django-5.0.4.dist-info/top_level.txt           |     1 [32m+[m
+ .../lib/python3.10/site-packages/_distutils_hack/__init__.py     |   132 [32m+[m
+ .../lib/python3.10/site-packages/_distutils_hack/override.py     |     1 [32m+[m
+ .../python3.10/site-packages/asgiref-3.8.1.dist-info/INSTALLER   |     1 [32m+[m
+ .../lib/python3.10/site-packages/asgiref-3.8.1.dist-info/LICENSE |    27 [32m+[m
+ .../python3.10/site-packages/asgiref-3.8.1.dist-info/METADATA    |   246 [32m+[m
+ .../lib/python3.10/site-packages/asgiref-3.8.1.dist-info/RECORD  |    27 [32m+[m
+ .../lib/python3.10/site-packages/asgiref-3.8.1.dist-info/WHEEL   |     5 [32m+[m
+ .../site-packages/asgiref-3.8.1.dist-info/top_level.txt          |     1 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/asgiref/__init__.py  |     1 [32m+[m
+ .../.venv/lib/python3.10/site-packages/asgiref/compatibility.py  |    48 [32m+[m
+ .../python3.10/site-packages/asgiref/current_thread_executor.py  |   115 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/asgiref/local.py     |   128 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/asgiref/py.typed     |     0
+ back-end/.venv/lib/python3.10/site-packages/asgiref/server.py    |   157 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/asgiref/sync.py      |   613 [32m++[m
+ back-end/.venv/lib/python3.10/site-packages/asgiref/testing.py   |   103 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/asgiref/timeout.py   |   118 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/asgiref/typing.py    |   278 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/asgiref/wsgi.py      |   166 [32m+[m
+ .../site-packages/certifi-2024.2.2.dist-info/INSTALLER           |     1 [32m+[m
+ .../python3.10/site-packages/certifi-2024.2.2.dist-info/LICENSE  |    20 [32m+[m
+ .../python3.10/site-packages/certifi-2024.2.2.dist-info/METADATA |    66 [32m+[m
+ .../python3.10/site-packages/certifi-2024.2.2.dist-info/RECORD   |    14 [32m+[m
+ .../python3.10/site-packages/certifi-2024.2.2.dist-info/WHEEL    |     5 [32m+[m
+ .../site-packages/certifi-2024.2.2.dist-info/top_level.txt       |     1 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/certifi/__init__.py  |     4 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/certifi/__main__.py  |    12 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/certifi/cacert.pem   |  4814 [32m++++++++++++[m
+ back-end/.venv/lib/python3.10/site-packages/certifi/core.py      |   114 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/certifi/py.typed     |     0
+ .../site-packages/charset_normalizer-3.3.2.dist-info/INSTALLER   |     1 [32m+[m
+ .../site-packages/charset_normalizer-3.3.2.dist-info/LICENSE     |    21 [32m+[m
+ .../site-packages/charset_normalizer-3.3.2.dist-info/METADATA    |   683 [32m++[m
+ .../site-packages/charset_normalizer-3.3.2.dist-info/RECORD      |    35 [32m+[m
+ .../site-packages/charset_normalizer-3.3.2.dist-info/WHEEL       |     6 [32m+[m
+ .../charset_normalizer-3.3.2.dist-info/entry_points.txt          |     2 [32m+[m
+ .../charset_normalizer-3.3.2.dist-info/top_level.txt             |     1 [32m+[m
+ .../lib/python3.10/site-packages/charset_normalizer/__init__.py  |    46 [32m+[m
+ .../lib/python3.10/site-packages/charset_normalizer/__main__.py  |     4 [32m+[m
+ .../.venv/lib/python3.10/site-packages/charset_normalizer/api.py |   626 [32m++[m
+ .../.venv/lib/python3.10/site-packages/charset_normalizer/cd.py  |   395 [32m+[m
+ .../python3.10/site-packages/charset_normalizer/cli/__init__.py  |     6 [32m+[m
+ .../python3.10/site-packages/charset_normalizer/cli/__main__.py  |   296 [32m+[m
+ .../lib/python3.10/site-packages/charset_normalizer/constant.py  |  1995 [32m+++++[m
+ .../lib/python3.10/site-packages/charset_normalizer/legacy.py    |    54 [32m+[m
+ .../charset_normalizer/md.cpython-310-x86_64-linux-gnu.so        |   Bin [31m0[m -> [32m16064[m bytes
+ .../.venv/lib/python3.10/site-packages/charset_normalizer/md.py  |   615 [32m++[m
+ .../charset_normalizer/md__mypyc.cpython-310-x86_64-linux-gnu.so |   Bin [31m0[m -> [32m268472[m bytes
+ .../lib/python3.10/site-packages/charset_normalizer/models.py    |   340 [32m+[m
+ .../lib/python3.10/site-packages/charset_normalizer/py.typed     |     0
+ .../lib/python3.10/site-packages/charset_normalizer/utils.py     |   421 [32m+[m
+ .../lib/python3.10/site-packages/charset_normalizer/version.py   |     6 [32m+[m
+ .../.venv/lib/python3.10/site-packages/corsheaders/__init__.py   |     0
+ back-end/.venv/lib/python3.10/site-packages/corsheaders/apps.py  |    15 [32m+[m
+ .../.venv/lib/python3.10/site-packages/corsheaders/checks.py     |   178 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/corsheaders/conf.py  |    75 [32m+[m
+ .../.venv/lib/python3.10/site-packages/corsheaders/defaults.py   |    21 [32m+[m
+ .../.venv/lib/python3.10/site-packages/corsheaders/middleware.py |   169 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/corsheaders/py.typed |     0
+ .../.venv/lib/python3.10/site-packages/corsheaders/signals.py    |     8 [32m+[m
+ .../.venv/lib/python3.10/site-packages/distutils-precedence.pth  |     1 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/django/__init__.py   |    24 [32m+[m
+ back-end/.venv/lib/python3.10/site-packages/django/__main__.py   |    10 [32m+[m
+ .../.venv/lib/python3.10/site-packages/django/apps/__init__.py   |     4 [32m+[m
+ .../.venv/lib/python3.10/site-packages/django/apps/config.py     |   274 [32m+[m
+ .../.venv/lib/python3.10/site-packages/django/apps/registry.py   |   437 [32m++[m
+ .../.venv/lib/python3.10/site-packages/django/conf/__init__.py   |   364 [32m+[m
+ .../site-packages/django/conf/app_template
