@@ -15,12 +15,14 @@ const BattlePage = () => {
     const [activeKey, setActiveKey] = useState(null);
     const [cynthiaActiveKey, setCynthiaActiveKey] = useState(null);
 
-    useEffect(() => { // initial fetch of both teams
+    // On page load, calls to fetch both teams
+    useEffect(() => { 
         fetchOurTeam();
         fetchCynthiaTeam();
     }, []);
 
-    useEffect(() => { // Check if Cynthia needs to switch or if she's out
+    // Check if Cynthia needs to switch or if she's out
+    useEffect(() => { 
         // Check if the currently active Cynthia's Pokémon has zero HP
         if (cynthiaPokemon && cynthiaTeamHP[cynthiaPokemon.pokemon.pokedex_number] <= 0) {
             const nextPokemon = selectNextCynthiaPokemon();
@@ -32,8 +34,8 @@ const BattlePage = () => {
         }
     }, [cynthiaPokemon, cynthiaTeamHP])
 
-
-    useEffect(() => { // Check if user needs to switch or if they're out
+    // Check if user needs to switch or if they're out
+    useEffect(() => { 
         const delayCheck = setTimeout(() => {
             const totalHP = Object.values(ourTeamHP).reduce((acc, hp) => acc + hp, 0);
 
@@ -47,7 +49,8 @@ const BattlePage = () => {
         return () => clearTimeout(delayCheck);
     }, [ourTeamHP, currentPokemon]);
 
-    const fetchOurTeam = async () => {
+    // Fetches user's team
+    const fetchOurTeam = async () => { 
         const token = localStorage.getItem('token');
         const headers = { Authorization: `Token ${token}` };
         try {
@@ -69,7 +72,8 @@ const BattlePage = () => {
         }
     };
 
-    const fetchCynthiaTeam = async () => {
+    // Fetches Cynthia's team
+    const fetchCynthiaTeam = async () => { 
         try {
             const response = await axios.get('http://localhost:8000/api/teams/cynthia_team/');
             const pokemonsWithSprites = await Promise.all(response.data.pokemons.map(async (pokemon) => {
@@ -88,12 +92,14 @@ const BattlePage = () => {
         }
     };
 
-    const initialSelectPokemon = (pokemon) => {
+    // Prompts user to select the Pokemon they want to start with
+    const initialSelectPokemon = (pokemon) => { 
         setCurrentPokemon(pokemon);
         setCynthiaPokemon(cynthiaTeam[Math.floor(Math.random() * cynthiaTeam.length)])
     };
 
-    const switchPokemon = (pokemon) => {
+    // Allows user to switch Pokemon mid-battle
+    const switchPokemon = (pokemon) => { 
         setActiveKey(null)
         const currentHP = ourTeamHP[pokemon.pokemon.pokedex_number];
         if (currentPokemon && pokemon.pokemon.pokedex_number === currentPokemon.pokemon.pokedex_number) {
@@ -107,7 +113,9 @@ const BattlePage = () => {
         }
     }
 
-    const handleAttack = (userMove) => {
+    // Logic used whenever an attack is selected by user
+    // Checks if user and opponent's Pokemon is alive, then checks for speed to see who attacks first
+    const handleAttack = (userMove) => { 
         setUserHasAttacked(true)
         if (!userHasAttacked) {
             setEvents([]);
@@ -141,16 +149,14 @@ const BattlePage = () => {
         }
     };
 
-    // change logic for defenderType
-    const getTypeEffectiveness = (moveType, defenderTypes) => {
+    // Finds relation of attack type vs defender's type
+    const getTypeEffectiveness = (moveType, defenderTypes) => { 
         let multiplier = 1
 
         // Loop through each of defender's types to calculate effectiveness
         defenderTypes.forEach(defenderType => {
             // Find the effectiveness relation for this moveType against the defender's type
             let typeEffect = moveType.effectiveness_relations.find(relation => relation.target_type === defenderType.name)
-            // let typeEffect = defenderType.effectiveness_relations.find(relation => relation.target_type === defenderTypes)
-            // let typeEffect = defenderType.affected_by_relations.find(relation => relation.target_type === moveType)
             if (typeEffect) {
                 // Apply the multiplier from the effectiveness relation found
                 multiplier *= effectivenessMultipliers[typeEffect.effectiveness] // Default to 1 if no matching typeEffect is found
@@ -166,18 +172,21 @@ const BattlePage = () => {
         return multiplier
     };
 
-    const effectivenessMultipliers = {
+    // Calculates type effectiveness multiplier
+    const effectivenessMultipliers = { 
         super_effective: 2,
         less_effective: 0.5,
         not_effective: 0,
         normal: 1
     };
 
+    // Random move choice for AI opponent
     const selectRandomMove = (pokemon) => {
         const randomIndex = Math.floor(Math.random() * pokemon.chosen_moves.length)
         return pokemon.chosen_moves[randomIndex];
     };
 
+    // Logic for battle flow after an attack is selected
     const performBattle = async (firstAttacker, secondAttacker, firstMove, secondMove) => {
         // Execute the first attack and wait for it to complete
         const newHPAfterFirstAttack = await executeAttack(firstAttacker, secondAttacker, firstMove);
@@ -201,6 +210,7 @@ const BattlePage = () => {
 
     };
 
+    // Used when player switches out a Pokemon when their's has not fainted yet
     const enemySwitchCounterattack = (newPokemon) => {
         if (ourTeamHP[currentPokemon.pokemon.pokedex_number] > 0) {
             // if (currentPokemon.pokemon.hp > 0) {
@@ -211,6 +221,7 @@ const BattlePage = () => {
         return
     }
 
+    // Logic for damage calculations
     const executeAttack = async (attacker, defender, move) => {
         const attackStat = attacker.pokemon.attack > attacker.pokemon.special_attack ? attacker.pokemon.attack : attacker.pokemon.special_attack;
         const defenseStat = defender.pokemon.defense > defender.pokemon.special_defense ? defender.pokemon.defense : defender.pokemon.special_defense;
@@ -258,6 +269,7 @@ const BattlePage = () => {
         return newHP
     }
 
+    // Posting commentary onto screen
     const createBattleEvent = async (attacker, move, damage, effectivenessMessage) => {
         const postData = {
             attacker: attacker.pokemon.name,
@@ -278,6 +290,7 @@ const BattlePage = () => {
         }
     };
 
+    // AI's selection for their next pokemon to put up once user has KO'd their current pokemon
     const selectNextCynthiaPokemon = () => {
         // Filter out any Pokémon that has no HP left
         const availablePokemon = cynthiaTeam.filter(p => cynthiaTeamHP[p.pokemon.pokedex_number] > 0);
