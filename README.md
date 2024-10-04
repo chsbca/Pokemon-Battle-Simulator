@@ -88,7 +88,8 @@ Let me show you a step-by-step rundown of what happens when the user selects an 
 ```js
     // Called when the user clicks a move button on the front-end
     const handleAttack = (userMove) => {
-        setUserHasAttacked(true) // Sets state wherein the user cannot mass click a move/button to bypass the intended turn based nature of the game
+        // Sets state wherein the user cannot mass click a move/button to bypass the intended turn based nature of the game
+        setUserHasAttacked(true)
         if (!userHasAttacked) {
             setEvents([]);
             const userPoke = currentPokemon;
